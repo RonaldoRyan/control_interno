@@ -1,0 +1,214 @@
+:root {
+    --primary-100:#5DA399;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+  }
+
+/* /* Moviles */
+@media only screen and (max-width: 789px) {
+    /* Estilos para resoluciones menores o iguales a 768px */
+    .menu2 {
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        padding-bottom: 1rem;
+
+      }
+
+      .crearPerfil {
+        width: 100%;
+        margin-top: 1vh;
+
+      }
+      .panelRegistro {
+          width: 100%;
+          margin-top: 1vh;
+        }
+        .infoStudents {
+            color: black;
+            position: absolute;
+            top: 90vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.479);
+            width: auto;
+            margin: auto;
+          }
+        .infoProfessors{
+            color: black;
+            position: absolute;
+            top: 90vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.479);
+            width: auto;
+            margin: auto;
+
+
+        }
+        .infoOthersWorkers{
+            color: black;
+            position: absolute;
+            top: 90vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.479);
+            width: auto;
+            margin: auto;
+
+
+        }
+
+
+
+    }
+
+
+
+
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+      /* Estilos para pantallas con ancho de 768px */
+      /* Agrega aquí tus estilos */
+      .menu2 {
+          width: 100%;
+          height: auto;
+          margin-left: 0;
+          padding-bottom: 1rem;
+
+        }
+
+        .crearPerfil {
+          width: 100%;
+          margin-top: 1vh;
+          margin-left: 17rem;
+
+        }
+        .panelRegistro {
+            width: 100%;
+            margin-left: 17rem;
+            margin-top: 1vh;
+          }
+          .infoStudents {
+            color: black;
+            position: absolute;
+            top: 52vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.479);
+            margin: auto;
+            width: auto;
+          }
+
+          .infoProfessors{
+            color: black;
+            position: absolute;
+            top: 52vh;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.479);
+            margin: auto;
+            width: auto;
+
+
+
+            }
+            .infoOthersWorkers{
+                color: black;
+                position: absolute;
+                top: 52vh;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.479);
+                margin: auto;
+                width: auto;
+
+
+
+            }
+
+    }
+
+
+  @media only screen and (min-width: 1024px) {
+      /* Estilos para resoluciones mayores a 1024px */
+      .menu2 {
+        margin-top: 5vh;
+        height: 100%;
+        width: 25vh;
+        margin-left: 0;
+
+      }
+
+      .crearPerfil {
+        width: 20vh;
+        margin-top: 2rem;
+      }
+
+      .boton {
+        width: 20vh;
+        margin-top: 10vh;
+      }
+      .panelRegistro {
+          width: 20vh;
+          margin-top: 2rem;
+        }
+        .info{
+          width: 100%;
+        }
+        .infoStudents {
+            color: black;
+            position: absolute;
+            top: 15vh;
+            left: 30vh;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            margin: auto;
+          }
+
+
+        .infoProfessors{
+            color: black;
+            position: absolute;
+            top: 15vh;
+            left: 30vh;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            margin: auto;
+
+        }
+
+        .infoOthersWorkers{
+            color: black;
+            position: absolute;
+            top: 15vh;
+            left: 30vh;
+            right: 0;
+            bottom: 0;
+            width: auto;
+            height: auto;
+            margin: auto;
+
+        }
+
+
+
+    }

@@ -1,0 +1,266 @@
+:root {
+    --primary-100:#5DA399;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+
+  }
+
+  body {
+
+    background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7);
+    background-size: 100% 100%; /* o background-size: cover; */
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Modificación aquí */
+}
+
+
+
+
+.menu1{
+    background-color: var(--primary-100);
+    color: var(--bg-200);
+    border-bottom: 1px solid var(--accent-100);
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 1vh;
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+.menu-btn i.fa-bars {
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .menu-btn.active i.fa-bars {
+    transform: rotate(90deg);
+  }
+
+
+
+.links{
+    text-decoration: underline;
+}
+
+.links:hover{
+    color:var(--accent-100);
+
+}
+
+.menu2{
+    border-right: 1px  solid  var(--accent-100);
+
+
+}
+
+/* botones */
+
+.boton{
+    background-color: var(--primary-200);
+    color: var(--bg-100);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    border-color: var(--accent-100);
+}
+
+.boton:hover{
+    background-color: var(--primary-300);
+    color: var(--bg-100);
+    border-color: var(--primary-300);
+
+
+}
+
+
+.crearPerfil{
+    background-color: var(--text-200);
+    color: var(--bg-100);
+    border-color: var(--accent-100);
+
+
+}
+
+.crearPerfil:hover{
+    background-color: var(--accent-200);
+    color: var(--bg-100);
+
+}
+
+.panelRegistro{
+    background-color: var(--text-200);
+    color: var(--bg-100);
+    border-color: var(--accent-100);
+
+
+
+}
+
+
+.panelRegistro:hover{
+    background-color: var(--accent-200);
+    color: var(--bg-100);
+}
+
+
+
+
+
+
+
+
+   .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        color: var(--text-100);
+     }
+
+
+
+  .table {
+      width: 99%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      font-weight: 400;
+    }
+
+
+
+    .table thead th {
+      max-width: 120px; /*ajusta el valor según tus necesidades */
+      color: var(--bg-100);
+      text-decoration: underline;
+      background-color: var(--primary-200);
+      font-weight: 600;
+      text-transform: uppercase;
+
+    }
+
+
+    .table thead th,
+    .table tbody td {
+      padding: 0.85rem;
+      vertical-align: middle;
+      text-align: center;
+      border: 1px solid #050505;
+    }
+
+
+
+    .table tbody tr:nth-of-type(odd) {
+      background-color: var(--bg-200);
+
+    }
+
+    .table-striped tbody tr:nth-child(even) {
+      background-color: var(--primary-200);
+      color: var(--bg-100);
+
+    }
+
+    .table-striped tbody tr:nth-child(even) .btn-update {
+        background-color: var(--primary-100);
+        border-color: #000000;
+
+      }
+
+
+
+    /* Estilos de la tabla responsiva */
+    .table-responsive {
+      -webkit-overflow-scrolling: touch;
+      position: relative;
+    }
+
+
+    .table-scrollable {
+      max-height: 80vh;
+      overflow-y: scroll;
+    }
+
+
+    .modalUpdateBody{
+        background-color: var(--primary-100);
+        color: var(--text-100);
+        border-style: solid;
+        border-color:  var(--accent-100);
+    }
+
+
+    .modalUpdateBody{
+        background-color: var(--bg-200);
+        border-color: var(--accent-100);
+    }
+
+
+    .modalUpdateBody .modal-header{
+        background-color: var(--primary-100);
+    }
+
+    .modalUpdateBody .btn-primary{
+        background-color: var(--primary-300);
+        color: var(--bg-100)
+
+    }
+
+    .modalUpdateBody .close{
+        background-color: var(--accent-200);
+        color: var(--bg-100)
+
+    }
+
+
+      .btn-update{
+        background-color: var(--primary-200);
+        margin-top: 1vh;
+      }
+
+      .btn-update:hover{
+        background-color: var(--primary-300);
+        color: var(--bg-100);
+      }
+
+      .btn-delete{
+         background-color: var(--accent-200);
+         color: white;
+      }
+
+      .btn-delete:hover{
+        background-color: var(--accent-200);
+        color: #000000;
+     }
+
+
+
+
+
+
+
+
+
+
+
+

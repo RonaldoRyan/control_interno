@@ -1,0 +1,72 @@
+:root {
+    --primary-100:#5DA399;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#ff4949;
+    --accent-300:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+  }
+
+  body {
+
+    background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7);
+    background-size: 100% 100%; /* o background-size: cover; */
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; /* Modificación aquí */
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border-style: solid double;
+    border-color: var(--primary-300);
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  h1{
+    color: var(--primary-200);
+    text-decoration: underline;
+  }
+
+
+  label{
+      color: var(--primary-300);
+  }
+
+.forgetPassword{
+    color: var(--accent-300);
+}
+
+  .btn{
+    background-color: var(--primary-200);
+    color: var(--bg-100);
+  }
+
+  .btn:hover{
+    background-color: var(--primary-300);
+    color: var(--bg-100);
+  }
+
+
+  .form-control:focus-within{
+    border-color: var(--primary-100);
+  }
