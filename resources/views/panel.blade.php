@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mediaQ_panel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/modals.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/stikers.css') }}">
 
 
 
@@ -24,29 +25,38 @@
 
 
 
+
+
 {{-- modales de creacion de fichas y registro de usuario --}}
 @include('modules_views.modals')
 
 
 @section('dashboard')
 
-{{-- panel de estudiantes --}}
-     @include('modules_views.student_panel')
-
-{{-- panel de profesores --}}
-     @include('modules_views.professor_panel')
-{{-- panel de otros funcioanrios --}}
-     @include('modules_views.other_worker_panel')
 
 
+{{-- @include('modules_views.logo') --}}
+@if (!isset($students) && !isset($professors) && !isset($othersWorkers))
 
-      @endsection
+         <h2 class="title">Control de Datos Internos</h2>
+        <div class="imgDashboard">
+        <img src="{{ asset('imgs/logo.jpeg') }}" alt="Logo">
 
-      @section('scripts')
+        </div>
 
-    <script type="text/javascript" src="{{ asset('js/panel.js') }}"></script>
+@endif
 
-      @endsection
+
+  {{-- panel de estudiantes --}}
+  @include('modules_views.student_panel')
+
+  {{-- panel de profesores --}}
+  @include('modules_views.professor_panel')
+
+  {{-- panel de otros funcionarios --}}
+  @include('modules_views.other_worker_panel')
+@endsection
+
 
 
  @endsection

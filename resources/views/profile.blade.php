@@ -4,6 +4,8 @@
 
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 <link rel="stylesheet" href="{{ asset('css/modals.css') }}">
+<link rel="stylesheet" href="{{ asset('css/stikers.css') }}">
+
 
 
 
@@ -16,36 +18,46 @@
 
 <nav class="navbar navbar-expand-lg menu1">
     <img src="{{ asset('imgs/logo.jpeg') }}" alt="Logo" class="logo">
-
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon bg-white"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
+
         <li class="nav-item">
-          <a class="nav-link links" href="{{route('panel')}}"> <i class="fas fa-th-large"></i>Panel Principal</a>
+            <a class="nav-link links" href="{{route('panel')}}">
+                <i class="fas fa-th-large">
+                </i> Panel Principal</a>
+          </li>
+
+
+
+        <li class="nav-item active">
+          {{-- <a class="nav-link" href="#">Cerrar sesión</a> --}}
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn links closeSesion ml-2">
+                <i class="fas fa-sign-out ml-1"></i>
+                 Cerrar Sesion
+            </button>
+
+          </form>
         </li>
 
 
 
-        <li class="nav-item">
-            <form action="{{ route('logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-cerrar ml-2 links">
-                    <i class="fas fa-sign-out ml-1"></i>
-                    Cerrar Sesion
-                </button>
-
-              </form>
-        </li>
 
       </ul>
     </div>
   </nav>
 
+
 @endsection
 
 @section('content')
+<img src="{{ asset('imgs/cerebro.png') }}" class="cerebro">
+<img src="{{ asset('imgs/engranaje.png') }}" class="engranaje">
+
 
     <div class="container mt-5">
         <div class="row justify-content-center">
@@ -72,7 +84,8 @@
 
                         </div>
                         <div class="form-group row">
-                            <label for="last_login" class="col-md-4 col-form-label text-md-right">Ultima Conexion</label>
+                            <label for="last_login" class="col-md-4 col-form-label text-md-right">Hora de conexion
+                            </label>
 
                             <div class="col-md-6">
                                 <input id="last_login" type="text" class="form-control" name="email" value="{{ Auth::user()->last_login_at }}" readonly>
@@ -132,9 +145,12 @@
                                     </button>
                                 </div>
                                 @if(session('change'))
-                                <div class="alert alert-success">{{ session('change') }}</div>
+                                <div class="alert alert-success mt-2">{{ session('change') }}</div>
                                 @endif
 
+                                @if(session('error'))
+                                <div class="alert alert-danger mt-2">{{session('error')}}</div>
+                                @endif
                             </div>
                         </form>
                         <hr>
@@ -142,7 +158,7 @@
 
                         <div class="form-group row">
                             <h3>Creacion de  Usarios</h3>
-                            <button type="submit" class="btn createUser" id="register" data-toggle="modal" data-target="#registerModal">Cre@r Usuario</button>
+                            <button type="submit" class="btn createUser" id="register" data-toggle="modal" data-target="#registerModal">Crear nuevo Usuario</button>
                         </div>
 
                         @endcan

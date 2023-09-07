@@ -3,55 +3,61 @@
 <!-- Aquí se muestran los datos de maestros -->
 <h1 class="title">Registro de Maestros</h1>
 
-<div class="infoProfessors  table-scrollable">
-    <div class="table-responsive">
+<div class="infoProfessors">
 
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-            <th>Nombre</th>
-            <th>Cédula</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Condiciones</th>
-            @can('update.professor')
-            <th>Editar o Eliminar</th>
-            @endcan
 
-          </tr>
-        </thead>
-        <tbody>
-          @foreach ($professors as $professor)
-            <tr>
-              <td>{{ $professor->name }}</td>
-              <td>{{ $professor->idNumber }}</td>
-              <td>{{ $professor->address }}</td>
-              <td>{{ $professor->phone }}</td>
-              <td>{{ $professor->email }}</td>
-              <td>{{ $professor->allergies_or_conditions }}</td>
+ <!-- Aquí se muestran los datos de otros funcionarios -->
 
-              {{-- botones de eliminar y actualziar --}}
-              @can('delete.professor')
+<div class="row panelData">
+    @foreach ($professors as $professor)
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <div class="card mt-2 cards">
+        <div class="card-body">
+        <img src="{{ asset('imgs/profesora.png') }}" class="stikerCard">
 
-               <td>
-                  <form action="{{ route('delete.professor', $professor->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-    <button type="button" onclick="showConfirmation()" class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> </button>
+          <h5 class="card-title name"> {{ $professor->name }}</h5>
+          <p class="card-text"><em>Cedula:</em> {{ $professor->idNumber }}</p>
+          <p class="card-text"> <em> Telefono:</em> {{ $professor->phone }}</p>
+           <button class="btn btn-success moreInfo"><i class="far fa-eye"></i>
+            ver mas
+           </button>
+           <div class="info" hidden>
+          {{-- <hr> --}}
+          <hr>
+          <p class="card-text"><em>Direccion:</em> {{ $professor->address }}</p>
+          <hr>
+          <p class="card-text"><em>Correo:</em> {{ $professor->email }}</p>
+          <hr>
+          <p class="card-text"><em>Algun padecimiento o condicion especial:</em> {{$professor->allergies_or_conditions}}</p>
+          <hr>
 
-                  </form>
 
-                   <form action="{{ route('update.professor', $professor) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                   <button type="button" class="btn btn-update" id="modalProfessor2" data-toggle="modal" data-target="#professorUpdate{{$professor->id}}">                        <i class="fas fa-pencil-alt"></i>
-                    </button>
-                   </form>
-                </td>
-                @endcan
+           </div>
+           @can('delete.professor')
+               
+           <form action="{{ route('delete.professor', $professor->id) }}" method="POST">
+              @csrf
+              @method('DELETE')
+  <button type="button"  class="btn btn-danger deleteData mt-3"> <i class="fas fa-trash"></i>
+  Eliminar
+</button>
 
-            </tr>
+
+            </form>
+                      <form action="{{ route('update.professor', $professor) }}" method="POST">
+                          @csrf
+                          @method('PUT')
+                       <button type="button" class="btn btn-update" id="modalProfessor2" data-toggle="modal" data-target="#professorUpdate{{$professor->id}}">
+                         <i class="fas fa-pencil-alt"></i>
+                         Actualizar
+                       </button>
+                    </form>
+
+          @endcan
+
+        </div>
+      </div>
+    </div>
 
 
             {{-- inicio modal --}}
@@ -59,7 +65,7 @@
 
 <div class="modal fade" id="professorUpdate{{$professor->id}}" tabindex="-1" role="dialog" aria-labelledby="actualizarProfesorModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
-<div class="modal-content">
+<div class="modal-content modalUpdateBody">
 <div class="modal-header">
     <h5 class="modal-title" id="actualizarProfesorModalLabel">{{ __('Actualizar ficha de Profesor') }}</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('Cerrar') }}">
@@ -118,9 +124,8 @@
 </div>
             {{-- final del modal --}}
           @endforeach
-        </tbody>
-      </table>
-    </div>
-  </div>
+      </div>
+
 @endif
+
 @endsection

@@ -70,13 +70,14 @@ class Other_WorkersController extends Controller
 
         return redirect()->back()->with('success', 'Ficha Creada de forma Correcta.');
     }
+
+
     public function destroy_othersWorkers($id)
     {
     $otherWorker = Other_worker::find($id);
 
     $otherWorker->delete();
 
-    // return redirect()->route('panel/professors');
     return redirect()->back()->with('success', 'Professor created successfully.');
 
     }

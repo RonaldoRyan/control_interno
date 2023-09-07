@@ -1,5 +1,5 @@
 :root {
-    --primary-100:#5DA399;
+    --primary-100:#00bca0;
     --primary-200:#40867d;
     --primary-300:#004840;
     --accent-100:#FF6B6B;
@@ -14,27 +14,58 @@
 
   }
 
-  body {
+  html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
 
-    background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7);
-    background-size: 100% 100%; /* o background-size: cover; */
-    background-position: center;
+
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8);
+    background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh; /* Modificación aquí */
-}
+    background-attachment: fixed;
+  }
+
 
 .menu1{
-    background-color: var(--primary-100);
+    background-color: #070707;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid var(--accent-100);
 
+
 }
+.menu1 a{
+    color: white;
+    margin-left: 2vh;
+}
+
+
+
+.closeSesion{
+    color: white;
+    /* position: fixed; */
+    right: 2vh;
+
+}
+
+
+
 
 .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 9vh;
+    height: 9vh;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 1vh;
@@ -47,25 +78,21 @@
   }
 
 
-.links{
-    color: var(--text-100);
-}
-
 .links:hover{
     color: var(--accent-100);
 }
 
 
 .card{
-    background-color: var(--bg-200);
+    background-color: rgba(255, 255, 255, 0.73);
     color: var(--text-100);
-    border-style: double;
-    border-color: var(--accent-100);
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+
 }
 
 h2, h3{
-    color: var(--primary-300);
+    color: var(--text-100);
 }
 
 
@@ -80,12 +107,17 @@ input{
     margin-top: 2rem;
     display: block;
     margin: 0 auto;
-    background-color: var(--primary-300);
     color: var(--bg-100);
-    border-color: var(--text-200);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
+
 }
 
 .createUser:hover{
-    background-color: var(--accent-100);
-    color: #000;
+    color: #070707;
+    background-color: var(--primary-200);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
+
+
 }

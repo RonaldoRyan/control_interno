@@ -1,0 +1,70 @@
+.creatividad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15vh;
+    height: 15vh;
+    overflow: hidden;
+    margin-left: 4vh;
+    /* margin: 0 auto; */
+  }
+
+  .creatividad img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+ 
+  .cerebro{
+    position: absolute;
+    overflow: hidden;
+    margin: 0 auto;
+    object-fit: contain;
+    width: 25vh;
+    height: 25vh;
+    top: 20vh;
+
+  }
+  .cerebro img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .engranaje{
+    position: absolute;
+    overflow: hidden;
+    margin: 0 auto;
+    object-fit: contain;
+    width: 25vh;
+    height: 25vh;
+    bottom: 0vh;
+    right: 5vh;
+
+  }
+  .engranaje img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+
+
+
+  .stikerCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8vh;
+    height: 8vh;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+
+  .stikerCard img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }

@@ -44,7 +44,7 @@ class PasswordController extends Controller
         return redirect()->route('profile')->with('change', '¡Contraseña actualizada con éxito!');
     } else {
         // Si la contraseña actual es incorrecta, mostrar un mensaje de error y redirigir al usuario de vuelta al formulario de cambio de contraseña
-        return redirect()->back()->with('error', 'La contraseña actual es incorrecta');
+        return redirect()->route('profile')->with('error', 'La contraseña actual es incorrecta');
     }
     }
 

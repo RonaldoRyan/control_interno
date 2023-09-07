@@ -29,51 +29,63 @@ class MainController extends Controller
     }
 
 
+    public function sections($option)
+    {
+        $viewData = [];
 
-    public function sections($option){
-        switch($option){
+        switch ($option) {
             case 'students':
                 $students = Student::all();
-                return view('panel')->with('students', $students);
+                $viewData['students'] = $students;
                 break;
             case 'professors':
                 $professors = Professor::all();
-                return view('panel')->with('professors', $professors);
+                $viewData['professors'] = $professors;
                 break;
             case 'othersWorkers':
                 $othersWorkers = Other_worker::all();
-                return view('panel')-> with('othersWorkers', $othersWorkers);
+                $viewData['othersWorkers'] = $othersWorkers;
                 break;
             case 'mealBenefit':
                 $students = Student::where('benefits', 'Solo Alimentacion')->get();
-                return view('panel')->with('students', $students)->with('title', 'Servicio de Comedor');
+                $viewData['students'] = $students;
+                $viewData['title'] = 'Servicio de Comedor';
                 break;
             case 'babyGroup':
                 $ageRange = $this->getAgeRange($option);
                 $students = Student::whereBetween('age', $ageRange)
-                                  ->where('benefits', 'cuido')
-                                  ->get();
-                return view('panel')->with('students', $students)->with('title', 'Grupo de 0 a 2 años');
+                                    ->where('benefits', 'cuido')
+                                    ->get();
+                $viewData['students'] = $students;
+                $viewData['title'] = 'Grupo de 0 a 2 años';
                 break;
             case 'middleGroup':
                 $ageRange = $this->getAgeRange($option);
                 $students = Student::whereBetween('age', $ageRange)
-                                  ->where('benefits', 'cuido')
-                                  ->get();
-                return view('panel')->with('students', $students)->with('title', 'Grupo de 3 a 4 años');
+                                    ->where('benefits', 'cuido')
+                                    ->get();
+                $viewData['students'] = $students;
+                $viewData['title'] = 'Grupo de 3 a 4 años';
                 break;
             case 'olderGroup':
                 $ageRange = $this->getAgeRange($option);
                 $students = Student::whereBetween('age', $ageRange)
-                                  ->where('benefits', 'cuido')
-                                  ->get();
-                return view('panel')->with('students', $students)->with('title', 'Grupo de 5 a 6 años');
-                break;
-            default:
-                return redirect()->route('otra_ruta');
+                                    ->where('benefits', 'cuido')
+                                    ->get();
+                $viewData['students'] = $students;
+                $viewData['title'] = 'Grupo de 5 a 6 años';
                 break;
         }
+
+        return view('panel', $viewData);
     }
+
+
+
+
+
+
+
 
 
     private function getAgeRange($option){

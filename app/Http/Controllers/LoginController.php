@@ -10,6 +10,7 @@ use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 
 
@@ -20,46 +21,48 @@ class LoginController extends Controller
 
     public function register(Request $request)
     {
-        // Validate data
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-        ]);
+        try {
+            // Validate data
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users',
+            ]);
 
-        // Verificar si el usuario ya existe en la base de datos
-        $existingUser = User::where('email', $request->email)->exists();
+            // Verificar si el usuario ya existe en la base de datos
+            $existingUser = User::where('email', $request->email)->exists();
 
-        if ($existingUser) {
-            return redirect()->back()->withErrors(['error' => 'El usuario ya existe']);
+            if ($existingUser) {
+                return redirect()->back()->withErrors(['error' => 'El usuario ya existe']);
+            }
+
+            // Generar una contraseña aleatoria
+            $password = Str::random(10);
+
+            // Crear un nuevo usuario con la contraseña generada
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($password)
+            ]);
+
+            // Obtener el rol por defecto que deseas asignar al usuario
+            $defaultRole = Role::where('name', 'profesor')->first();
+
+            // Asignar el rol por defecto al usuario recién creado
+            $user->assignRole($defaultRole);
+
+            // Crea una instancia de la clase Counts
+            $email = new Counts($user, $password);
+
+            // Envía el correo electrónico
+            Mail::to($user->email)->send($email);
+
+            return redirect()->back()->with(['Register' => 'Usuario Creado']);
+        } catch (TransportException $e) {
+            return view('email-error');
         }
-
-        // Generar una contraseña aleatoria
-        $password = Str::random(10);
-
-        // Crear un nuevo usuario con la contraseña generada
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($password)
-        ]);
-
-        // Obtener el rol por defecto que deseas asignar al usuario
-        $defaultRole = Role::where('name', 'profesor')->first();
-
-        // Asignar el rol por defecto al usuario recién creado
-        $user->assignRole($defaultRole);
-
-        // Crea una instancia de la clase Counts
-         $email = new Counts($user, $password);
-
-        // Envía el correo electrónico
-          Mail::to($user->email)->send($email);
-
-          return redirect()->back()->with(['Register' => 'Usario Creado']);
-
-
-
     }
+
 
 
 

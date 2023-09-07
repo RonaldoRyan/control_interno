@@ -1,5 +1,6 @@
 
 @section('students')
+
 @if(isset($students))
  <!-- Aquí se muestran los datos de estudiantes -->
  <h1 class="title">
@@ -10,77 +11,97 @@
     @endif
 </h1>
 
- <div class="infoStudents table-scrollable">
-     <div class="table-responsive">
+<div class="infoStudents">
 
-       <table class="table table-bordered table-striped">
-         <thead class="thead-dark sticky-top">
-             <tr>
-             <th>Nombre</th>
-             <th>Fecha Nacimiento</th>
-             <th>Edad</th>
-             <th>Dirección</th>
-             <th>Tipo de Beneficio</th>
-             <th>Nombre del Padre</th>
-             <th>Cedula Padre</th>
-             <th>Telefono Padre</th>
-             <th>Nombre de la Madre</th>
-             <th>Cedula Madre</th>
-             <th>Telefono Madre</th>
-             <th>Contacto de Emergencia</th>
-             <th>Cedula Contacto de Emergencia</th>
-             <th>Telefono del contacto de emergencia</th>
-             <th>Registro de Vacunas</th>
-             <th>Alergias del menor o alguna condicion especial</th>
-             <th>Editar o Eliminar</th>
-           </tr>
-         </thead>
-         <tbody>
-           @foreach ($students as $student)
-             <tr>
-               <td>{{ $student->name }}</td>
-               <td>{{ $student->birth_date }}</td>
-               <td>{{ $student->age }}</td>
-               <td>{{ $student->address }}</td>
-               <td>{{ $student->benefits }}</td>
-               <td>{{ $student->dad_name }}</td>
-               <td>{{ $student->idNumber_dad }}</td>
-               <td>{{ $student->dad_phone }}</td>
-               <td>{{ $student->mom_name }}</td>
-               <td>{{ $student->idNumber_mom }}</td>
-               <td>{{ $student->mom_phone }}</td>
-               <td>{{ $student->emergency_contact }}</td>
-               <td>{{ $student->emergency_Idcontact }}</td>
-               <td>{{ $student->emergency_contact_phone }}</td>
-               <td>{{ $student->vaccine_information }}</td>
-               <td>{{ $student->allergies_or_conditions }}</td>
-                {{-- botones de eliminar y actualziar --}}
 
-                <td>
-{{-- eliminar --}}
-@can('delete.student')
-<form action="{{ route('delete.student', $student->id) }}" method="POST" id="delete-form">
-    @csrf
-    @method('DELETE')
+    <!-- Aquí se muestran los datos de otros funcionarios -->
 
-    <button type="button" onclick="showConfirmation()" class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> </button>
-</form>
-@endcan
+   <div class="row panelData">
+       @foreach ($students as $student)
+       <div class="col-lg-4 col-md-6 col-sm-12">
+         <div class="card mt-3">
+           <div class="card-body">
+        <img src="{{ asset('imgs/osito.png') }}" class="stikerCard">
 
+             <h5 class="name">{{ $student->name }}</h5>
+             <p class="age"><em>Edad:</em> {{ $student->age }} años</p>
+             <p class="benefit"> <em> Tipo de beneficio:</em> {{ $student->benefits }}</p>
+             <p class="card-text"><em>Direccion:</em> {{ $student->address }}</p>
+
+
+
+
+              <button class="btn btn-success moreInfo"><i class="far fa-eye"></i>
+                otros datos
+              </button>
+              <div class="info" hidden>
+
+             <hr>
+             <p class="card-text"> <em>F.Nacimiento:</em> {{ $student->birth_date }}</p>
+             <hr>
+             <p class="card-text"> <em> Madre:</em> {{ $student->mom_name }}</p>
+             <hr>
+             <p class="card-text"><em>Telefono madre:</em> {{ $student->mom_phone }}</p>
+             <hr>
+             <p class="card-text"><em>Cedula madre:</em> {{ $student->idNumber_mom }}</p>
+             <hr>
+             <p class="card-text"> <em> Padre:</em> {{ $student->dad_name }}</p>
+              <hr>
+             <p class="card-text"><em>Telefono padre:</em> {{ $student->dad_phone }}</p>
+             <hr>
+             <p class="card-text"><em>cedula papa:</em> {{ $student->idNumber_dad }}</p>
+             <hr>
+             <p class="card-text"><em>Contacto Emergencia:</em> {{ $student->emergency_contact }}</p>
+             <hr>
+             <p class="card-text"><em>cedula:</em> {{ $student->emergency_Idcontact }}</p>
+             <hr>
+             <p class="card-text"><em>Numero Telefonico:</em> {{ $student->emergency_contact_phone }}</p>
+             <hr>
+             <p class="card-text"><em>Info de vacunas:</em> {{ $student->vaccine_information }}</p>
+             <hr>
+             <p class="card-text"><em>Alergias o condiciones especiales del menor:</em> {{ $student->allergies_or_conditions }}</p>
+             <hr>
+
+
+
+              </div>
+              @can('delete.student')
+
+                <form action="{{ route('delete.student', $student->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="button"  class="btn btn-danger deleteData mt-3"> <i class="fas fa-trash"></i>
+                    Eliminar
+                </button>
+                </form>
+
+              @endcan
 
 
                  {{-- actualizar --}}
-<form action="{{ route('update.student', $student) }}" method="POST">
-   @csrf
-   @method('PUT')
-     <button type="button" class="btn btn-update" id="modalStudent2" data-toggle="modal" data-target="#studentUpdate{{$student->id}}">
-         <i class="fas fa-pencil-alt"></i>
-     </button>
-               </form>
+                 @can('update.student')
+                <form action="{{ route('update.student', $student) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                <button type="button" class="btn btn-update" id="modalstudent2" data-toggle="modal" data-target="#studentUpdate{{$student->id}}">
+                <i class="fas fa-pencil-alt"></i>
+                Actualizar
+                </button>
+                </form>
+                @endcan
 
-               </td>
+            <button class="btn btn-pdf">
+                <a href="{{ route('export.pdf', ['id' => $student->id]) }}" target="_blank">
+                    <i class="fa-regular fa-file-pdf" style="color: #ffffff;"></i>
+                    Descargar pdf
+                </a>
 
-             </tr>
+            </button>
+
+           </div>
+         </div>
+       </div>
+  {{-- inicio modal --}}
               {{-- modal de update --}}
      <div class="modal fade updateStudents" id="studentUpdate{{$student->id}}" tabindex="-1" role="dialog" aria-labelledby="actualizarEstudianteModalLabel" aria-hidden="true">
          <div class="modal-dialog" role="document">
@@ -106,11 +127,11 @@
          </div>
          <div class="form-group">
          <label for="birth_date">{{ __('Fecha de Nacimiento') }}</label>
-         <input type="date" class="form-control" id="birth_dateModal" name="birth_date" placeholder="{{ __('Ingrese la fecha de nacimiento del estudiante') }}" value="{{$student->birth_date}}" required>
+         <input type="date" class="form-control birth_date" id="birth_dateModal" name="birth_date" placeholder="{{ __('Ingrese la fecha de nacimiento del estudiante') }}" value="{{$student->birth_date}}" required>
         </div>
         <div class="form-group">
             <label for="age">{{ __('Edad') }}</label>
-            <input type="number" class="form-control" id="ageModal" name="age" placeholder="{{ __('Edad del estudiante') }}" value="{{$student->age}}" required>
+            <input type="number" class="form-control age" id="ageModal" name="age" placeholder="{{ __('Edad del estudiante') }}" value="{{$student->age}}" required>
            </div>
          <div class="form-group">
          <label for="address">{{ __('Dirección') }}</label>
@@ -186,12 +207,9 @@ value="{{$student->emergency_contact}}" required>
 
          {{-- fin modal --}}
 
-           @endforeach
-         </tbody>
-       </table>
-     </div>
-   </div>
+         @endforeach
+        </div>
 
-@endif
-@endsection
+  @endif
 
+  @endsection

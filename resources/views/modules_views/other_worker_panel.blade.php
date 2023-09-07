@@ -3,60 +3,64 @@
      <!-- Aquí se muestran los datos de otros funcionarios -->
 <h1 class="title">Registro de Otros Funcionarios</h1>
 
-     <div class="infoOthersWorkers table-scrollable">
-        <div class="table-responsive">
 
-          <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-                <tr>
-                <th>Nombre</th>
-                <th>Cédula</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Correo</th>
-                <th>Funciones</th>
-                <th>Condiciones</th>
-                <th>Editar o Eliminar</th>
+     <div class="infoOthersWorkers">
 
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($othersWorkers as $otherWorker)
-                <tr>
-                  <td>{{ $otherWorker->name }}</td>
-                  <td>{{ $otherWorker->idNumber }}</td>
-                  <td>{{ $otherWorker->address }}</td>
-                  <td>{{ $otherWorker->phone }}</td>
-                  <td>{{ $otherWorker->email }}</td>
-                  <td>{{ $otherWorker->section }}</td>
-                  <td>{{ $otherWorker->conditions }}</td>
-                   {{-- botones de eliminar y actualziar --}}
-                   <td>
-                    <form action="{{ route('delete.otherWorker', $otherWorker->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-    <button type="button" onclick="showConfirmation()" class="btn btn-danger mt-3"> <i class="fas fa-trash"></i> </button>
+<!-- Aquí se muestran los datos de otros funcionarios -->
+
+<div class="row panelData">
+  @foreach ($othersWorkers as $otherWorker)
+  <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="card mt-2 cards">
+      <div class="card-body">
+        <img src="{{ asset('imgs/equipo.png') }}" class="stikerCard">
+
+        <h5 class="card-title name">{{ $otherWorker->name }}</h5>
+        <p class="card-text"><em>Area de trabajo:</em> {{ $otherWorker->section }}</p>
+        <p class="card-text"> <em> Telefono:</em> {{ $otherWorker->phone }}</p>
+         <button class="btn btn-success moreInfo"><i class="far fa-eye"></i>
+            Otros Datos
+         </button>
+         <div class="info" hidden>
+        <hr>
+        <p class="card-text"><em>Cedula:</em>  {{ $otherWorker->idNumber }}</p>
+        <hr>
+        <p class="card-text"><em>Direccion:</em> {{ $otherWorker->address }}</p>
+        <hr>
+        <p class="card-text"><em>Condicion especial:</em> {{ $otherWorker->conditions }}</p>
+        <hr>
 
 
+         </div>
+         <form action="{{ route('delete.otherWorker', $otherWorker->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+       <button type="button" class="btn btn-danger mt-3 deleteData"> <i class="fas fa-trash"></i>
+       Eliminar
+      </button>
 
-                    </form>
+          </form>
                     <form action="{{ route('update.otherWorker', $otherWorker) }}" method="POST">
                         @csrf
                         @method('PUT')
                      <button type="button" class="btn btn-update" id="modalProfessor2" data-toggle="modal" data-target="#otherWorkerUpdate{{$otherWorker->id}}">
                        <i class="fas fa-pencil-alt"></i>
+                       Actualizar
                      </button>
                   </form>
-                  </td>
-                </tr>
-               {{-- inicio modal --}}
+      </div>
+    </div>
+  </div>
+
+
+                 {{-- inicio modal --}}
 
       <!-- Modal para crear ficha de otros funcionarios -->
 
 
       <div class="modal fade" id="otherWorkerUpdate{{$otherWorker->id}}" tabindex="-1" role="dialog" aria-labelledby="actualizarOtherModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
+          <div class="modal-content modalUpdateBody">
             <div class="modal-header">
               <h5 class="modal-title" id="actualizarOtherModalLabel">{{ __('Actualizar la ficha de otro tipo de funcionario') }}</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('Cerrar') }}">
@@ -120,12 +124,12 @@
 
 
                {{-- fin modal --}}
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
+  @endforeach
+</div>
 
 
  @endif
+
+
+
      @endsection

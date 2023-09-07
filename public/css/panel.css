@@ -1,5 +1,5 @@
 :root {
-    --primary-100:#5DA399;
+    --primary-100:#00bca0;
     --primary-200:#40867d;
     --primary-300:#004840;
     --accent-100:#FF6B6B;
@@ -14,30 +14,42 @@
 
   }
 
+  html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+
+
+
   body {
-
-    background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7);
-    background-size: 100% 100%; /* o background-size: cover; */
-    background-position: center;
-    background-repeat: no-repeat;
-    min-height: 100vh; /* Modificación aquí */
-}
-
+    /* background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7); */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
 
 
+  }
 
-.menu1{
-    background-color: var(--primary-100);
-    color: var(--bg-200);
-    border-bottom: 1px solid var(--accent-100);
-}
 
-.logo {
+  ul, ol {
+    list-style-type: none;
+  }
+
+
+
+
+  .logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 40px;
+    width: 9vh;
+    height: 9vh;
     border-radius: 50%;
     overflow: hidden;
     margin-left: 1vh;
@@ -50,7 +62,19 @@
   }
 
 
-.menu-btn i.fa-bars {
+  .cerebro{
+    position: absolute;
+  }
+
+
+
+  img {
+    display: none;
+  }
+
+
+
+   .menu-btn i.fa-bars {
     transition: transform 0.5s ease-in-out;
   }
 
@@ -64,54 +88,72 @@
     text-decoration: underline;
 }
 
+
+
 .links:hover{
     color:var(--accent-100);
 
 }
 
-.menu2{
-    border-right: 1px  solid  var(--accent-100);
 
-
-}
 
 /* botones */
 
 .boton{
-    background-color: var(--primary-200);
+    color: var(--text-100);
+    margin-top: 1vh;
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    background-color: var(--accent-100);
     color: var(--bg-100);
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    border-color: var(--accent-100);
+
+
 }
 
 .boton:hover{
-    background-color: var(--primary-300);
-    color: var(--bg-100);
-    border-color: var(--primary-300);
+    background-color: var(--accent-100);
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.3);
+    color: #000000;
+
 
 
 }
 
 
 .crearPerfil{
-    background-color: var(--text-200);
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    background-color: var(--primary-100);
     color: var(--bg-100);
-    border-color: var(--accent-100);
+    border-color: var(--accent-200);
+
+
+
 
 
 }
 
 .crearPerfil:hover{
-    background-color: var(--accent-200);
-    color: var(--bg-100);
+    background-color:var(--primary-100);
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    color: #000000;
+
+
+
 
 }
 
 .panelRegistro{
-    background-color: var(--text-200);
+    color: var(--text-100);
+    border-color: var(--accent-200);
+    box-shadow:0 2px 2px 2px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
     color: var(--bg-100);
-    border-color: var(--accent-100);
+
+
+
+
 
 
 
@@ -119,8 +161,12 @@
 
 
 .panelRegistro:hover{
-    background-color: var(--accent-200);
-    color: var(--bg-100);
+    background-color:var(--primary-100);
+    color: #000000;
+    box-shadow:0 0px 2px 1px rgba(0, 0, 0, 0.732);
+
+
+
 }
 
 
@@ -135,89 +181,56 @@
         align-items: center;
         justify-content: center;
         margin: auto;
+        margin-top: 1vh;
         color: var(--text-100);
+
      }
 
 
+     .card{
+        overflow: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgba(255, 255, 255, 0.612);
+        text-align: center;
 
-  .table {
-      width: 99%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      font-weight: 400;
-    }
-
-
-
-    .table thead th {
-      max-width: 120px; /*ajusta el valor según tus necesidades */
-      color: var(--bg-100);
-      text-decoration: underline;
-      background-color: var(--primary-200);
-      font-weight: 600;
-      text-transform: uppercase;
-
-    }
+     }
 
 
-    .table thead th,
-    .table tbody td {
-      padding: 0.85rem;
-      vertical-align: middle;
-      text-align: center;
-      border: 1px solid #050505;
-    }
-
-
-
-    .table tbody tr:nth-of-type(odd) {
-      background-color: var(--bg-200);
-
-    }
-
-    .table-striped tbody tr:nth-child(even) {
-      background-color: var(--primary-200);
-      color: var(--bg-100);
-
-    }
-
-    .table-striped tbody tr:nth-child(even) .btn-update {
-        background-color: var(--primary-100);
-        border-color: #000000;
-
+     .info {
+        line-height: 1.4;
+        display: hidden;
       }
 
 
 
-    /* Estilos de la tabla responsiva */
-    .table-responsive {
-      -webkit-overflow-scrolling: touch;
-      position: relative;
-    }
+     .card:hover{
+       border:solid 2px var(--primary-100);
+     }
+
+     .name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
 
-    .table-scrollable {
-      max-height: 80vh;
-      overflow-y: scroll;
-    }
 
 
-    .modalUpdateBody{
-        background-color: var(--primary-100);
+      .modalUpdateBody{
+        background-color: var(--bg-100);
         color: var(--text-100);
-        border-style: solid;
-        border-color:  var(--accent-100);
+        border:solid 2px var(--primary-100);
+
     }
 
 
-    .modalUpdateBody{
-        background-color: var(--bg-200);
-        border-color: var(--accent-100);
-    }
 
 
     .modalUpdateBody .modal-header{
-        background-color: var(--primary-100);
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+
     }
 
     .modalUpdateBody .btn-primary{
@@ -235,12 +248,13 @@
 
       .btn-update{
         background-color: var(--primary-200);
+        color: white;
         margin-top: 1vh;
       }
 
       .btn-update:hover{
         background-color: var(--primary-300);
-        color: var(--bg-100);
+        color: white;
       }
 
       .btn-delete{
@@ -252,10 +266,21 @@
         background-color: var(--accent-200);
         color: #000000;
      }
+       .btn-pdf a{
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+       }
+
+      .btn-pdf{
+        background-color: rgb(85, 74, 74);
+        margin-top: 1vh;
+      }
 
 
+      .btn-pdf:hover{
+        background-color: rgb(60, 50, 50);
 
-
+      }
 
 
 

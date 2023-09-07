@@ -51,7 +51,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form method="POST" action="{{ route('saveStudent') }}">
+            <form method="POST" action="{{ route('saveStudent') }}" id="student-form">
                 @csrf
                 <div class="form-group">
                     <label for="name">{{ __('Nombre') }}</label>
@@ -62,11 +62,11 @@
                 </div>
                 <div class="form-group">
                     <label for="birth_date">{{ __('Fecha de Nacimiento') }}</label>
-                    <input type="date" class="form-control" id="birth_date" name="birth_date" placeholder="{{ __('Ingresar la fecha de nacimiento') }}" required>
+                    <input type="date" class="form-control birth_date" id="birth_date" name="birth_date" placeholder="{{ __('Ingresar la fecha de nacimiento') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="age">{{ __('Edad') }}</label>
-                    <input type="number" class="form-control" id="age" name="age" placeholder="{{ __('Edad') }}" required>
+                    <input type="number" class="form-control age" id="age" name="age" placeholder="{{ __('Edad') }}" required>
                 </div>
                 <div class="form-group">
                     <label for="address">{{ __('Dirección') }}</label>
@@ -225,7 +225,7 @@
     </div>
     <div class="modal-body">
        <!-- Aquí van los campos del formulario -->
-       <form method="POST" action="{{ route('saveOtherWorker') }}">
+       <form method="POST" action="{{ route('saveOtherWorker') }}"  id="otherWorker-form">
         @csrf
         <div class="form-group">
             <label for="name">{{ __('Nombre') }}</label>

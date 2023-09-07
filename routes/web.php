@@ -7,6 +7,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\Other_WorkersController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PDFController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -81,6 +83,10 @@ Route::put('/students/{id}', [StudentController::class, 'update_students'])->nam
 Route::put('/professors/{id}', [ProfessorController::class, 'update_professors'])->name('update.professor');
 
 Route::put('/othersWorkers/{id}', [Other_WorkersController::class, 'update_otherWorkers'])->name('update.otherWorker');
+
+
+// exportar registros a PDF
+Route::get('/export/pdf/{id}', [PDFController::class, 'exportToPDF'])->name('export.pdf');
 
 
 
