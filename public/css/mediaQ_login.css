@@ -1,0 +1,182 @@
+:root {
+    --primary-100:#5DA399;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+  }
+
+/* /* Moviles */
+@media only screen and (max-width: 789px) {
+    /* Estilos para resoluciones menores o iguales a 768px */
+
+    body{
+        background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8);
+    }
+
+
+    .login-container{
+        /* background-color: rgba(255, 255, 255, 0.371); */
+       background-color: rgba(255, 255, 255, 0.73);
+        padding: 1vh;
+        border-radius: 25px;
+        height: 100vh;
+        box-shadow:0 3px 3px 2px rgba(0, 0, 0, 0.645);
+        position: relative;
+
+
+
+
+      }
+
+      .creatividad{
+        width: 8rem;
+        height: 8rem;
+        right: 0vh;
+        top: 22vh;
+      }
+
+      .engranaje{
+        width: 8rem;
+        height: 8rem;
+        right: 0vh;
+        bottom: 18vh;
+      }
+
+
+
+
+      .pintura{
+        width: 5rem;
+        height: 5rem;
+        top: 10vh;
+      }
+
+      .cerebro{
+        width: 5rem;
+        height: 5rem;
+        bottom: 0;
+
+      }
+
+}
+
+@media only screen and (min-width: 788px) and (max-width: 1023px) {
+
+
+    body{
+        background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8);
+    }
+
+
+    .login{
+       height: 80vh;
+       background-color: rgba(255, 255, 255, 0.73);
+       border-radius: 25px;
+       box-shadow:0 3px 3px 2px rgba(0, 0, 0, 0.645);
+       padding: 1vh;
+       margin-top: 5vh;
+
+
+
+      }
+
+      .creatividad{
+        width: 15vh;
+        height: 15vh;
+        top: 20vh;
+        right: 10vh;
+      }
+
+
+      .engranaje{
+        width: 15vh;
+        height: 15vh;
+        bottom: 20vh;
+        right: 10vh;
+      }
+
+      .pintura{
+        width: 15vh;
+        height: 15vh;
+        bottom: 20vh;
+        left: 15vh;
+      }
+
+      .cerebro{
+        width: 15vh;
+        height: 15vh;
+        top: 10vh;
+        left: 5vh;
+      }
+
+
+}
+
+
+
+@media only screen and (min-width: 1024px) {
+    /* Estilos para resoluciones mayores a 1024px */
+
+
+
+    body{
+        background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8);
+
+    }
+
+
+    .login{
+
+       /* background-color: rgba(255, 255, 255, 0.304); */
+       /* background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8); */
+       background-color: rgba(255, 255, 255, 0.73);
+       border-radius: 25px;
+       box-shadow:0 3px 3px 2px rgba(0, 0, 0, 0.645);
+       padding: 1vh;
+       margin-top: 5vh;
+
+
+      }
+
+      .creatividad{
+        width: 25vh;
+        height: 25vh;
+        top: 20vh;
+        left: 30vh;
+      }
+
+      .engranaje{
+        width: 25vh;
+        height: 25vh;
+        bottom: 20vh;
+        left: 30vh;
+      }
+
+      .pintura{
+        width: 25vh;
+        height: 25vh;
+        bottom: 20vh;
+        right: 30vh;
+      }
+
+      .cerebro{
+        width: 25vh;
+        height: 25vh;
+        top: 10vh;
+        right: 30vh;
+
+      }
+
+
+}
+
+
+

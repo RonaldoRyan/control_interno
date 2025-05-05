@@ -1,0 +1,358 @@
+:root {
+    --primary-100:#00bca0;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+
+  }
+
+/* /* Moviles */
+@media only screen and (max-width: 789px) {
+    /* Estilos para resoluciones menores o iguales a 768px */
+
+    .menu1{
+        background-color: #000000;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+        border-bottom: 2px solid var(--accent-100);
+
+    }
+
+    .links{
+        color: var(--bg-100);
+    }
+
+
+    .menu2 {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        margin-left: 0;
+        padding-bottom: 1rem;
+        top: auto;
+
+      }
+
+      .crearPerfil {
+        width: 100%;
+        margin-top: 2vh;
+
+
+      }
+      .panelRegistro {
+          width: 100%;
+          margin-top: 2vh;
+
+        }
+        .infoStudents {
+            position: absolute;
+            top: 60vh;
+            background-color: rgba(245, 245, 245, 0.556);
+
+          }
+        .infoProfessors{
+            position: absolute;
+            top: 60vh;
+            background-color: rgba(245, 245, 245, 0.556);
+
+
+        }
+        .infoOthersWorkers{
+            position: absolute;
+            top: 60vh;
+            background-color: rgba(245, 245, 245, 0.556);
+
+
+        }
+
+
+        .card{
+            /* background-image: linear-gradient(to right bottom, #11e4ff, #00d0ff, #1db7ff, #8797ff, #c66ce8, #d156d5, #da3abe, #e100a6, #d000b7, #b700cb, #8f00e1, #400af8); */
+            color: var(--text-100);
+
+        }
+
+
+
+
+
+
+    }
+
+
+
+
+    @media only screen and (min-width: 768px) and (max-width: 1023px) {
+      /* Estilos para pantallas con ancho de 768px */
+      /* Agrega aquí tus estilos */
+
+      .menu1{
+        background-color: #070707;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        border-bottom: 2px solid var(--accent-100);
+
+    }
+
+    .links{
+        color: var(--bg-100);
+    }
+      .menu2 {
+
+        width: 100%;
+        height: auto;
+        position: absolute;
+        margin-left: 0;
+        padding-bottom: 1rem;
+        top: auto;
+        /* background-color: #004840; */
+
+
+
+
+
+        }
+
+        .botonesMenu{
+            /* margin-left: 20vh; */
+            /* background-color: #004840; */
+            width: 100%;
+        }
+
+
+        .crearPerfil {
+          width: 100%;
+          margin-top: 1vh;
+          border-color: var(--accent-100);
+
+        }
+        .panelRegistro {
+            width: 100%;
+            margin-top: 1vh;
+            border-color: var(--accent-100);
+
+          }
+          .infoStudents {
+            color: black;
+            position: absolute;
+            top: 30vh;
+            margin: auto 0;
+            width: auto;
+
+          }
+
+          .infoProfessors{
+            color: black;
+            position: absolute;
+            top: 30vh;
+            margin: auto;
+            width: auto;
+
+
+
+            }
+            .infoOthersWorkers{
+                color: black;
+                position: absolute;
+                top: 30vh;
+                margin: auto 0;
+                width: auto;
+
+
+
+            }
+            .card{
+                background-image: linear-gradient(to right bottom, #11e4ff, #00d0ff, #1db7ff, #8797ff, #c66ce8, #d156d5, #da3abe, #e100a6, #d000b7, #b700cb, #8f00e1, #400af8);
+                color: var(--text-100);
+
+            }
+
+
+    }
+
+
+  @media only screen and (min-width: 1024px) {
+      /* Estilos para resoluciones mayores a 1024px */
+
+      body{
+        height: 100%;
+
+
+
+      }
+
+
+      .menu1{
+        background-color: #070707;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        height: 10vh;
+        border-bottom: 1px solid var(--primary-100);
+
+
+    }
+
+    .menu1 a, .closeSesion{
+        color: white;
+    }
+
+    .menu1 a:hover{
+        color: var(--primary-100);
+    }
+
+    .closeSesion{
+
+        position: fixed;
+        right: 3vh;
+
+    }
+
+    .closeSesion:hover{
+        color: var(--primary-100);
+    }
+      .menu2 {
+        position: absolute;
+        top: 10vh;
+        bottom: 0;
+        width: 30vh;
+        border-right: 1px  solid  var(--primary-100);
+        box-shadow: 10px 0 5px -5px rgba(0,0,0,0.3);
+        height: auto;
+
+
+      }
+
+
+
+
+
+
+      .crearPerfil {
+        width: 20vh;
+        margin-top: 2rem;
+        background-color: var(--primary-100);
+        color: var(--bg-100);
+
+      }
+
+      .boton {
+        width: 20vh;
+        margin-top: 15vh;
+
+
+      }
+
+      .panelRegistro {
+          width: 20vh;
+          margin-top: 2rem;
+          background-color: var(--primary-100);
+          color: var(--bg-100);
+
+
+        }
+        .info{
+          width: 100%;
+        }
+
+        .infoStudents{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            left: 35vh;
+            top: 20vh;
+            width: 80%;
+            overflow: auto;
+            height: 75vh;
+            padding: 2vh;
+             box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+             background-image: linear-gradient(to right bottom, #11e4ff, #00d0ff, #1db7ff, #8797ff, #c66ce8, #d156d5, #da3abe, #e100a6, #d000b7, #b700cb, #8f00e1, #400af8);
+
+
+        }
+
+          .infoProfessors{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            left: 35vh;
+            top: 20vh;
+            width: 80%;
+            overflow: auto;
+            height: 75vh;
+            padding: 2vh;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+            background-image: linear-gradient(to right bottom, #11e4ff, #00d0ff, #1db7ff, #8797ff, #c66ce8, #d156d5, #da3abe, #e100a6, #d000b7, #b700cb, #8f00e1, #400af8);
+
+        }
+
+        .infoOthersWorkers{
+            position: absolute;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            left: 35vh;
+            top: 20vh;
+            width: 80%;
+            overflow: auto;
+            height: 75vh;
+            padding: 5vh;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+            background-image: linear-gradient(to right bottom, #11e4ff, #00d0ff, #1db7ff, #8797ff, #c66ce8, #d156d5, #da3abe, #e100a6, #d000b7, #b700cb, #8f00e1, #400af8);
+
+
+        }
+
+
+
+        .card {
+            width: 50vh;
+            height: 50vh;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            background-color: white;
+        }
+
+        .imgDashboard{
+            position: absolute;
+            top: 30%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35vh;
+            height: 35vh;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: rotate 20s linear infinite; /* Configuración de la animación */
+
+
+          }
+
+          .imgDashboard img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+          }
+
+          @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+
+
+
+
+    }
+
+
+

@@ -1,0 +1,123 @@
+:root {
+    --primary-100:#00bca0;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#ff4949;
+    --accent-300:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+  }
+
+  html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-image: linear-gradient(to right bottom, #10d6f0, #00c5ff, #18afff, #8292ff, #c26ae4, #cc55d4, #d63ac1, #dd00ac, #c712c0, #a927d4, #7c39e7, #0a48f8);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+
+.menu1{
+    background-color: #070707;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--accent-100);
+
+
+}
+.menu1 a{
+    color: white;
+    margin-left: 2vh;
+}
+
+
+
+.closeSesion{
+    color: white;
+    /* position: fixed; */
+    right: 2vh;
+
+}
+
+
+
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 1vh;
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+.links:hover{
+    color: var(--accent-100);
+}
+
+
+.card{
+    background-color: rgba(255, 255, 255, 0.73);
+    color: var(--text-100);
+    margin-bottom: 2vh;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+
+}
+
+h2, h3{
+    color: var(--text-100);
+}
+
+
+input{
+    margin-top: 3vh;
+
+}
+
+
+.createUser{
+    width: 20vh;
+    margin-top: 2rem;
+    display: block;
+    margin: 0 auto;
+    color: var(--bg-100);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
+
+}
+
+.createUser:hover{
+    color: #070707;
+    background-color: var(--primary-200);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
+
+
+}

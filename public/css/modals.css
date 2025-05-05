@@ -1,0 +1,71 @@
+:root {
+    --primary-100:#00bca0;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+
+  }
+
+/* modal de creacion de usarios*/
+
+.registerModal{
+    background-color: var(--bg-100);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.645);
+    border:solid 2px var(--primary-100);
+
+
+}
+
+
+.registerModal .modal-header{
+    background-color: black;
+    color: rgb(255, 255, 255);
+}
+
+.registerModal .register{
+    background-color: var(--primary-300);
+    color: var(--bg-100)
+
+}
+
+.registerModal .close{
+    background-color: var(--accent-200);
+    color: var(--bg-100)
+
+}
+
+
+
+/* modal para crear las fichas de estudiantes, profesores, y otros funcionarios */
+
+.createTab{
+
+    background-color: var(--bg-100);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.645);
+
+}
+
+.createTab .modal-header{
+    background-color: rgb(0, 0, 0);
+    color:rgb(255, 255, 255);
+    border:solid 2px var(--primary-100);
+
+}
+
+.createTab .btn-primary{
+    background-color: var(--primary-300);
+}
+.createTab .close{
+    background-color: var(--accent-200);
+    color: var(--bg-100);
+}
+
+

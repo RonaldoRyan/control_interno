@@ -1,0 +1,291 @@
+:root {
+    --primary-100:#00bca0;
+    --primary-200:#40867d;
+    --primary-300:#004840;
+    --accent-100:#FF6B6B;
+    --accent-200:#8f001a;
+    --text-100:#333333;
+    --text-200:#5c5c5c;
+    --bg-100:#E0E7E9;
+    --bg-200:#d6dddf;
+    --bg-300:#aeb5b7;
+
+
+
+  }
+
+  html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+
+
+
+
+
+  body {
+    /* background-image: linear-gradient(to right top, #e0e7e9, #dee5e7, #dce3e5, #dae1e3, #d8dfe1, #d4dbdd, #d0d7d9, #ccd3d5, #c4cbcd, #bdc4c6, #b5bcbe, #aeb5b7); */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+
+
+  }
+
+
+  ul, ol {
+    list-style-type: none;
+  }
+
+
+
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 9vh;
+    height: 9vh;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 1vh;
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+
+  .cerebro{
+    position: absolute;
+  }
+
+
+
+  img {
+    display: none;
+  }
+
+
+
+   .menu-btn i.fa-bars {
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .menu-btn.active i.fa-bars {
+    transform: rotate(90deg);
+  }
+
+
+
+.links{
+    text-decoration: underline;
+}
+
+
+
+.links:hover{
+    color:var(--accent-100);
+
+}
+
+
+
+/* botones */
+
+.boton{
+    color: var(--text-100);
+    margin-top: 1vh;
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    background-color: var(--accent-100);
+    color: var(--bg-100);
+
+
+}
+
+.boton:hover{
+    background-color: var(--accent-100);
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.3);
+    color: #000000;
+
+
+
+}
+
+
+.crearPerfil{
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    background-color: var(--primary-100);
+    color: var(--bg-100);
+    border-color: var(--accent-200);
+
+
+
+
+
+}
+
+.crearPerfil:hover{
+    background-color:var(--primary-100);
+    box-shadow: 0 3px 3px 2px rgba(0, 0, 0, 0.645);
+    transition: box-shadow 0.3s ease;
+    color: #000000;
+
+
+
+
+}
+
+.panelRegistro{
+    color: var(--text-100);
+    border-color: var(--accent-200);
+    box-shadow:0 2px 2px 2px rgba(0, 0, 0, 0.645);
+    background-color: var(--primary-100);
+    color: var(--bg-100);
+
+
+
+
+
+
+
+}
+
+
+.panelRegistro:hover{
+    background-color:var(--primary-100);
+    color: #000000;
+    box-shadow:0 0px 2px 1px rgba(0, 0, 0, 0.732);
+
+
+
+}
+
+
+
+
+
+
+
+
+   .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+        margin-top: 1vh;
+        color: var(--text-100);
+
+     }
+
+
+     .card{
+        overflow: auto;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: rgba(255, 255, 255, 0.612);
+        text-align: center;
+
+     }
+
+
+     .info {
+        line-height: 1.4;
+        display: hidden;
+      }
+
+
+
+     .card:hover{
+       border:solid 2px var(--primary-100);
+     }
+
+     .name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+
+
+
+      .modalUpdateBody{
+        background-color: var(--bg-100);
+        color: var(--text-100);
+        border:solid 2px var(--primary-100);
+
+    }
+
+
+
+
+    .modalUpdateBody .modal-header{
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+
+    }
+
+    .modalUpdateBody .btn-primary{
+        background-color: var(--primary-300);
+        color: var(--bg-100)
+
+    }
+
+    .modalUpdateBody .close{
+        background-color: var(--accent-200);
+        color: var(--bg-100)
+
+    }
+
+
+      .btn-update{
+        background-color: var(--primary-200);
+        color: white;
+        margin-top: 1vh;
+      }
+
+      .btn-update:hover{
+        background-color: var(--primary-300);
+        color: white;
+      }
+
+      .btn-delete{
+         background-color: var(--accent-200);
+         color: white;
+      }
+
+      .btn-delete:hover{
+        background-color: var(--accent-200);
+        color: #000000;
+     }
+       .btn-pdf a{
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+       }
+
+      .btn-pdf{
+        background-color: rgb(85, 74, 74);
+        margin-top: 1vh;
+      }
+
+
+      .btn-pdf:hover{
+        background-color: rgb(60, 50, 50);
+
+      }
+
+
+
+
+
+
+
+
