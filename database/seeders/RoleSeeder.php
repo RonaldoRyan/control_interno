@@ -14,24 +14,24 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roleAdmi = Role::create(['name' => 'webAdmi']);
-        $roleProfe = Role::create(['name' => 'profesor']);
+        $roleAdmi = Role::create(['name' => 'webAdmi', 'guard_name'=> 'web']);
+        $roleProfe = Role::create(['name' => 'profesor', 'guard_name'=>'web']);
 
-        Permission::create(['name'=>'panel'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'profile'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'changePassword'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'sections'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'logout'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'register'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'saveStudent'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'saveProfessor'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'saveOtherWorker'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'delete.student'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'delete.professor'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'delete.otherWorker'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'update.student'])->syncRoles([$roleAdmi, $roleProfe]);
-        Permission::create(['name'=>'update.professor'])->syncRoles([$roleAdmi]);
-        Permission::create(['name'=>'update.otherWorker'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'panel', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'profile', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'changePassword', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'sections', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'logout', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'register', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'saveStudent', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'saveProfessor', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'saveOtherWorker', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'delete.student', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'delete.professor', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'delete.otherWorker', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'update.student', 'guard_name'=>'web'])->syncRoles([$roleAdmi, $roleProfe]);
+        Permission::create(['name'=>'update.professor', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
+        Permission::create(['name'=>'update.otherWorker', 'guard_name'=>'web'])->syncRoles([$roleAdmi]);
 
     }
 }
