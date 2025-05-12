@@ -22,7 +22,7 @@ class Student extends Model
         'idNumber_mom',
         'mom_phone',
         'emergency_contact',
-        'emergency_IdContact',
+        'emergency_Idcontact',
         'emergency_contact_phone',
         'vaccine_information',
         'allergies_or_conditions'

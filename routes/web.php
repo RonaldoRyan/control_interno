@@ -78,7 +78,9 @@ Route::delete('/othersWorkers/{id}',[Other_WorkersController::class, 'destroy_ot
 
 
 // actualizar registros
-Route::put('/students/{id}', [StudentController::class, 'update_students'])->name('update.student');
+// Route::put('/students/{id}', [StudentController::class, 'updateStudent'])->name('update.student');
+   Route::put('/students/{id}', [StudentController::class, 'updateStudent'])->name('update.student');
+
 
 Route::put('/professors/{id}', [ProfessorController::class, 'update_professors'])->name('update.professor');
 

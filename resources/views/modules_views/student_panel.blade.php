@@ -80,7 +80,7 @@
 
                  {{-- actualizar --}}
                  @can('update.student')
-                <form action="{{ route('update.student', $student) }}" method="POST">
+                <form action="{{ route('update.student', $student->id) }}" method="POST" onsubmit="console.log('Formulario enviado')">
                     @csrf
                     @method('PUT')
                 <button type="button" class="btn btn-update" id="modalstudent2" data-toggle="modal" data-target="#studentUpdate{{$student->id}}">
@@ -115,7 +115,7 @@
          <div class="modal-body modalUpdate">
 
 
-         <form method="POST" action="{{ route('update.student', $student->id) }}">
+         <form method="POST" action="{{ route('update.student', $student->id) }}" onsubmit="console.log('formulario enviado')">
          @csrf
          @method('PUT')
          <div class="form-group">
@@ -196,7 +196,7 @@ value="{{$student->emergency_contact}}" required>
          </div>
          <div class="modal-footer">
          <button type="button" class="btn btn-danger close" data-dismiss="modal">cerrar</button>
-         <button type="submit" class="btn btn-primary" data-toggle="modal">Guardar</button>
+         <button type="submit" class="btn btn-primary">Guardar</button>
 
          </form>
 
