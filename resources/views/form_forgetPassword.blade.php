@@ -14,7 +14,7 @@
                 <div class="card-header">{{ __('Restablecer contraseña') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('sendEmailResetPassword', ['token' => $token]) }}">
+                <form method="POST" action="{{ route('sendEmailResetPassword') }}">
                     @csrf
 
                     <div class="form-group row">

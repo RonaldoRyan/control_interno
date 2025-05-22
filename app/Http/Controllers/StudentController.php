@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\StudentRequest\StoreStudentRequest;
+use App\Http\Requests\StudentRequest\UpdateStudentRequest;
 use App\DTOs\StudentDTO;
-use App\Services\StudentService;
-use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+use App\Services\StudentServices\StudentService;
+
+
 
 
 class StudentController extends Controller

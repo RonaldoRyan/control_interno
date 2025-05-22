@@ -1,102 +1,63 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use App\Models\Professor;
-
-
-class Professors extends Model{
-
-public function __get($property)
-{
-if (property_exists($this, $property)) {
-    return $this->$property;
-}
-}
-
-public function __set($property, $value)
-{
-if (property_exists($this, $property)) {
-    $this->$property = $value;
-}
-return $this;
-}
-
-
-
-
-
-}
+use App\Http\Requests\ProfessorRequest\StoreProfessorRequest;
+use App\Http\Requests\ProfessorRequest\UpdateProfessorRequest;
+use App\DTOs\ProfessorDTO;
+use App\Services\ProfessorServices\ProfessorService;
 
 
 class ProfessorController extends Controller
+
+
+{
+
+  protected ProfessorService $professorService;
+
+  public function __construct(ProfessorService $professorService)
+  {
+    $this->professorService = $professorService;
+
+  }
+
+
+public function saveProfessor(StoreProfessorRequest $request)
 {
 
 
-    public function validateProfessorData(Request $request){
+    $dto = ProfessorDTO::fromArray($request->validated());
 
-        $request->validate([
-            'name' => 'required|string|max:50',
-            'idNumber' => 'required|integer',
-            'address' => 'required|string',
-            'phone' => 'required|integer',
-            'email' => 'required|string|max:50',
-            'allergies_or_conditions' => 'required|string',
-        ]);
+    (new ProfessorService())->createProfessor($dto);
 
 
-    }
+    return redirect()->back()->with('success', 'Professor created successfully.');
 
-    public function saveProfessor(Request $request)
+
+
+
+}
+
+
+
+    public function updateProfessor(UpdateProfessorRequest $request, $id)
     {
-        $this->validateProfessorData($request);
 
-        $professor = new Professor();
-        $professor->name = $request->input('name');
-        $professor->idNumber = $request->input('idNumber');
-        $professor->address = $request->input('address');
-        $professor->phone = $request->input('phone');
-        $professor->email = $request->input('email');
-        $professor->allergies_or_conditions = $request->input('allergies_or_conditions');
+        $dto = ProfessorDTO::fromArray($request->validated());
 
-        $professor->save();
+        $this->professorService->updateProfessor($id, $dto);
 
-        return redirect()->back()->with('success', 'Professor created successfully.');
+        return redirect()->back()->with('success', 'Professor Updated.');
+
     }
 
+    public function destroy_professors(int $id)
+    {
 
-    public function destroy_professors($id)
-{
-$professor = Professor::find($id);
+        $this->professorService->deleteProfessor($id);
 
-$professor->delete();
+        return redirect()
+            ->back()
+            ->with('success', 'Professor Eliminated.');
 
-return redirect()->back();
-
-}
-
-
-public function update_professors(Request $request, $id){
-
-        $professor = Professor::find($id);
-
-        $this->validateProfessorData($request);
-
-        $professor->name = $request->input('name');
-        $professor->idNumber = $request->input('idNumber');
-        $professor->address = $request->input('address');
-        $professor->phone = $request->input('phone');
-        $professor->email = $request->input('email');
-        $professor->allergies_or_conditions = $request->input('allergies_or_conditions');
-
-        $professor->save();
-
-        return redirect()->back()->with('update', 'Se Actualizo la Ficha del profesor.');
-
-
-}
-
-
+    }
 }

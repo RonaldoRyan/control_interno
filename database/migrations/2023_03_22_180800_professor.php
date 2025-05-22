@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('name', 50);
             $table->bigInteger('idNumber');
             $table->text('address');
-            $table->bigInteger('phone');
+            $table->string('phone', 15)->nullable();
             $table->string('email',50);
-            $table->text('allergies_or_conditions');
+            $table->text('allergies_or_conditions')->nullable();
             $table->timestamps();
         });
     }

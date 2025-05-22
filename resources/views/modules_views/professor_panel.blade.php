@@ -34,7 +34,7 @@
 
            </div>
            @can('delete.professor')
-               
+
            <form action="{{ route('delete.professor', $professor->id) }}" method="POST">
               @csrf
               @method('DELETE')
