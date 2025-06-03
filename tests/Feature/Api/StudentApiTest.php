@@ -14,9 +14,13 @@ class StudentApiTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-        // Autentica un usuario válido para rutas protegidas
-        Sanctum::actingAs(User::factory()->create(), [], 'web');
+    parent::setUp();
+    $this->seed(\Database\Seeders\RoleSeeder::class); // first create the roles and permissions
+    $this->withoutExceptionHandling(); // Esto es opcional, pero útil para ver errores detallados durante las pruebas
+
+    $user = User::factory()->create();
+    $user->assignRole('webAdmi','profesor'); // 2. Ahora puedes asignar el rol
+    Sanctum::actingAs($user);
     }
 
     /** @test */
@@ -43,7 +47,7 @@ class StudentApiTest extends TestCase
 
         $response = $this->postJson('/api/v1/students', $payload);
 
-        $response->assertStatus(200)
+        $response->assertStatus(201)
                  ->assertJsonStructure(['student' => ['id', 'name', 'age']]);
     }
 

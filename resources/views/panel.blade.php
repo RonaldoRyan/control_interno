@@ -54,7 +54,7 @@
   @include('modules_views.professor_panel')
 
   {{-- panel de otros funcionarios --}}
-  @include('modules_views.other_worker_panel')
+  @include('modules_views.OtherWorker_panel')
 @endsection
 
 

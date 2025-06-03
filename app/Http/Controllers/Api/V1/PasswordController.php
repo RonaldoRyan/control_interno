@@ -37,7 +37,7 @@ class PasswordController extends Controller
     {
         $this->svc->sendResetLink($request->input('email'));
 
-        return response()->json(['message' => 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña.']);
+        return response()->json(['message' => 'Password reset link sent to your email.']);
     }
 
     // Restablecer contraseña usando token

@@ -14,11 +14,29 @@ class ProfessorApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Set up the test environment before each test.
+     * This method seeds the database with roles, disables exception handling for debugging,
+     * creates a user, assigns roles to the user, and authenticates the user using Sanctum.
+     */
     protected function setUp(): void
     {
         parent::setUp();
-        // Autentica un usuario válido para rutas protegidas
-        Sanctum::actingAs(User::factory()->create(), [], 'web');
+
+        // Seed the database with roles
+        $this->seed(\Database\Seeders\RoleSeeder::class);
+
+        // Disable exception handling for easier debugging during tests
+        $this->withoutExceptionHandling();
+
+        // Create a user instance
+        $user = User::factory()->create();
+
+        // Assign roles to the user
+        $user->assignRole('webAdmi', 'profesor');
+
+        // Authenticate the user using Sanctum
+        Sanctum::actingAs($user);
     }
 
     /** @test */

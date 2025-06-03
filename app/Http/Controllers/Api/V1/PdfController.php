@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Professor;
-use App\Models\Other_worker;
+use App\Models\OtherWorker;
 use App\Services\PdfServices\PdfService;
 use Illuminate\Http\JsonResponse;
 
@@ -38,8 +38,8 @@ class PdfController extends Controller
 
     public function exportOtherWorkerPdf($id, PdfService $pdfService)
     {
-        $otherWorker = Other_worker::findOrFail($id);
-        $pdfContent = $pdfService->generatePdf($otherWorker, 'pdf.other_worker', 'otherWorker');
+        $otherWorker = OtherWorker::findOrFail($id);
+        $pdfContent = $pdfService->generatePdf($otherWorker, 'pdf.OtherWorker', 'otherWorker');
         $filename = 'ficha_personal_' . $otherWorker->name . '.pdf';
 
         return response($pdfContent, 200, [

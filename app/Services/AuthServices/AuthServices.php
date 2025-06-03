@@ -13,12 +13,24 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Mail\Counts;
 use Illuminate\Support\Facades\Auth;
+use DomainException;
 
 
 
 
 class AuthServices
 {
+
+    public function getTokenFor(User $user): string
+{
+    return $user->createToken('auth_token')->plainTextToken;
+}
+
+    /**
+     * @throws \DomainException
+     */
+
+
 
 
 public function register(RegisterUserDTO $dto): User
@@ -47,23 +59,16 @@ public function register(RegisterUserDTO $dto): User
 }
 public function login(LoginUserDTO $dto): array
 {
-    // 1) Verifica credenciales
     if (!Auth::attempt([
         'email'    => $dto->email,
         'password' => $dto->password
     ], false)) {
-        throw new \Exception('Credenciales inválidas');
+        throw new \DomainException('Credenciales inválidas');
     }
 
-    // 2) Obtiene el usuario autenticado
     $user = Auth::user();
-
-
-
-    // 3) Genera un token personal access
     $token = $user->createToken('auth_token')->plainTextToken;
 
-    // 4) Retorna datos para el controlador
     return [
         'user'  => $user,
         'token' => $token,

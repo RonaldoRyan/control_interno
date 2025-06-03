@@ -25,6 +25,7 @@ class OtherWorkerController extends Controller
 
      public function index(): JsonResponse
     {
+        $this->authorize('viewAny', OtherWorker::class);
         $otherWorkers = $this->otherWorkerService->getAll();
         return response()->json([
             'otherWorkers' => OtherWorkerResource::collection($otherWorkers),
@@ -34,6 +35,9 @@ class OtherWorkerController extends Controller
 
     public function store(StoreOtherWorkerRequest $request): JsonResponse
     {
+        $this->authorize('create', OtherWorker::class);
+
+
         $dto = OtherWorkerDTO::fromArray($request->validated());
         $otherWorker = $this->otherWorkerService->createOtherWorker($dto);
 
@@ -44,12 +48,17 @@ class OtherWorkerController extends Controller
     public function show(int $id): JsonResponse
     {
         $otherWorker = $this->otherWorkerService->findById($id);
+
         return response()->json([
             'otherWorker' => new OtherWorkerResource($otherWorker),
         ]);
+
     }
     public function update(UpdateOtherWorkerRequest $request, int $id): JsonResponse
     {
+        $otherWorker = OtherWorker::findOrFail($id);
+        $this->authorize('update', $otherWorker);
+
         $dto = OtherWorkerDTO::fromArray($request->validated());
         $otherWorker = $this->otherWorkerService->updateOtherWorker($id, $dto);
 
@@ -59,6 +68,9 @@ class OtherWorkerController extends Controller
     }
     public function destroy(int $id): JsonResponse
     {
+        $otherWorker = OtherWorker::findOrFail($id);
+        $this->authorize('delete', $otherWorker);
+
         $this->otherWorkerService->deleteOtherWorker($id);
         return response()->json([
             'message' => 'Other worker deleted successfully',

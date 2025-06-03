@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\View;
-use App\Models\Other_worker;
+use App\Models\OtherWorker;
 use App\Models\Professor;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -43,7 +43,7 @@ class MainController extends Controller
                 $viewData['professors'] = $professors;
                 break;
             case 'othersWorkers':
-                $othersWorkers = Other_worker::all();
+                $othersWorkers = OtherWorker::all();
                 $viewData['othersWorkers'] = $othersWorkers;
                 break;
             case 'mealBenefit':

@@ -1,0 +1,435 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Control Interno",
+        "description": "Documentación de la API para el sistema de control interno",
+        "contact": {
+            "email": "exampleEmail@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "operationId": "8b0ed6b21d3f55b7633c456c061e6816",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "jonhdoe@gmail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "jonhdoe25"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string",
+                                            "example": "token generado"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/students": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get all students",
+                "operationId": "9788d7452cee7294f345ef6978639194",
+                "responses": {
+                    "200": {
+                        "description": "List of students"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Crear nuevo estudiante",
+                "description": "//create a new student\n/**",
+                "operationId": "e31caf57ba23f90ea252e9a1adc130b5",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "birth_date",
+                                    "age",
+                                    "address",
+                                    "dad_name",
+                                    "idNumber_dad",
+                                    "dad_phone",
+                                    "mom_name",
+                                    "idNumber_mom",
+                                    "mom_phone",
+                                    "emergency_contact",
+                                    "emergency_Idcontact",
+                                    "emergency_contact_phone",
+                                    "vaccine_information",
+                                    "allergies_or_conditions"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Ronaldo Ryan"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 24
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Street"
+                                    },
+                                    "benefits": {
+                                        "type": "string",
+                                        "example": "Ninguno"
+                                    },
+                                    "dad_name": {
+                                        "type": "string",
+                                        "example": "Padre Ejemplo"
+                                    },
+                                    "idNumber_dad": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    },
+                                    "dad_phone": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    },
+                                    "mom_name": {
+                                        "type": "string",
+                                        "example": "Madre Ejemplo"
+                                    },
+                                    "idNumber_mom": {
+                                        "type": "string",
+                                        "example": "98765431"
+                                    },
+                                    "mom_phone": {
+                                        "type": "string",
+                                        "example": "987654321"
+                                    },
+                                    "emergency_contact": {
+                                        "type": "string",
+                                        "example": "Tía Ana"
+                                    },
+                                    "emergency_Idcontact": {
+                                        "type": "integer",
+                                        "example": 11223344
+                                    },
+                                    "emergency_contact_phone": {
+                                        "type": "string",
+                                        "example": "8888888888"
+                                    },
+                                    "vaccine_information": {
+                                        "type": "string",
+                                        "example": "Vacunas completas"
+                                    },
+                                    "allergies_or_conditions": {
+                                        "type": "string",
+                                        "example": "Ninguna"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Estudiante creado"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/students/{id}": {
+            "get": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Get a student by ID",
+                "operationId": "d62442c356d25b81161a482fb66efbf4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the student",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student data"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Update an existing student",
+                "operationId": "9ce726e62e22e3252b43e8ac848adb68",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "birth_date",
+                                    "age",
+                                    "address",
+                                    "dad_name",
+                                    "idNumber_dad",
+                                    "dad_phone",
+                                    "mom_name",
+                                    "idNumber_mom",
+                                    "mom_phone",
+                                    "emergency_contact",
+                                    "emergency_Idcontact",
+                                    "emergency_contact_phone",
+                                    "vaccine_information",
+                                    "allergies_or_conditions"
+                                ],
+                                "properties": {
+                                    "idStudent": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Luis Solis"
+                                    },
+                                    "birth_date": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "age": {
+                                        "type": "integer",
+                                        "example": 23
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "123 Main St"
+                                    },
+                                    "benefits": {
+                                        "type": "string",
+                                        "example": "None"
+                                    },
+                                    "dad_name": {
+                                        "type": "string",
+                                        "example": "John Doe Sr."
+                                    },
+                                    "idNumber_dad": {
+                                        "type": "string",
+                                        "example": "123456789"
+                                    },
+                                    "dad_phone": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "mom_name": {
+                                        "type": "string",
+                                        "example": "Jane Doe"
+                                    },
+                                    "idNumber_mom": {
+                                        "type": "string",
+                                        "example": "987654321"
+                                    },
+                                    "mom_phone": {
+                                        "type": "string",
+                                        "example": "0987654321"
+                                    },
+                                    "emergency_contact": {
+                                        "type": "string",
+                                        "example": "Alice Smith"
+                                    },
+                                    "emergency_Idcontact": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "emergency_contact_phone": {
+                                        "type": "string",
+                                        "example": "1122334455"
+                                    },
+                                    "vaccine_information": {
+                                        "type": "string",
+                                        "example": "All vaccines up to date"
+                                    },
+                                    "allergies_or_conditions": {
+                                        "type": "string",
+                                        "example": "None"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Student updated successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Students"
+                ],
+                "summary": "Delete an existing student",
+                "operationId": "b2b04afb4b4dd19acb12af1b701af550",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the student to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Student deleted successfully"
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Students",
+            "description": "Students"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

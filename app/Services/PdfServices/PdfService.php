@@ -2,7 +2,7 @@
 
 namespace App\Services\PdfServices;
 use App\Models\Student;
-use App\Models\Other_worker;
+use App\Models\OtherWorker;
 use App\Models\Professor;
 use Dompdf\Dompdf;
 use Dompdf\Options;

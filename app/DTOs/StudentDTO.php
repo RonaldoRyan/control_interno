@@ -4,7 +4,6 @@ namespace App\DTOs;
 class StudentDTO
 {
     public function __construct(
-        public ?int    $idStudent               = null,
         public string  $name,
         public string  $birth_date,
         public int     $age,
@@ -26,7 +25,7 @@ class StudentDTO
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['idStudent'] ?? null,
+
             $data['name'],
             $data['birth_date'],
             (int) $data['age'],

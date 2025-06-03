@@ -44,7 +44,7 @@ class StudentService
     public function createStudent(StudentDTO $dto): Student
     {
         return Student::create([
-            'id'                      => $dto->idStudent,
+
             'name'                    => $dto->name,
             'birth_date'              => $dto->birth_date,
             'age'                     => $dto->age,

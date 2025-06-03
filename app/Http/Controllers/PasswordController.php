@@ -3,13 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use RealRashid\SweetAlert\Facades\Alert;
-use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ForgetPasswords;
 use App\Services\PasswordServices\PasswordService;
 use App\Http\Requests\PasswordRequest\ChangePasswordRequest;
 use App\Http\Requests\PasswordRequest\ForgotPasswordRequest;
@@ -59,7 +52,7 @@ class PasswordController extends Controller
     public function sendEmailResetPassword(ForgotPasswordRequest $request){
         $this->svc->sendResetLink($request->input('email'));
 
-        return redirect()->route('index')->with('status', 'Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña.');
+        return redirect()->route('index')->with('status', 'Password reset link sent to your email address.');
 
     }
 

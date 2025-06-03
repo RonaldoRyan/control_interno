@@ -14,6 +14,15 @@ class OtherWorkerResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'idOtherWorker' => $this->idOtherWorker,
+            'name'          => $this->name,
+            'idNumber'      => $this->idNumber,
+            'address'       => $this->address,
+            'phone'         => $this->phone,
+            'email'         => $this->email,
+            'section'       => $this->section,
+            'conditions'    => $this->conditions,
+        ];
     }
 }

@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Services\AuthServices\AuthServices;
-use illuminate\Http\JsonResponse;
+use Illuminate\Http\JsonResponse;
 
 
 
@@ -29,28 +29,37 @@ class AuthController extends Controller
 
         $dto = RegisterUserDTO::fromArray($request->validated());
         $user = $this->authServices->register($dto);
+        $token = $this->authServices->getTokenFor($user);
 
-          Mail::to($user->email)->send(new Counts($user, 'additional_argument'));
-
-        return response()->json(['message'=>'User created successfully', 'user'=>$user], 201);
-    }
-
-
-    public function Login(LoginUserRequest $request): JsonResponse{
-
-        $dto    = LoginUserDTO::fromArray($request->validated());
-         // Ahora $result es ['user'=>User, 'token'=>string]
-        $result = $this->authServices->login($dto);
+          Mail::to($user->email)->queue(new Counts($user, 'additional_argument'));
 
         return response()->json([
-          'message'      => 'User logged in successfully',
-          'access_token' => $result['token'],
-           'user'         => $result['user'],
-], 200);
+            'message'=>'User created successfully',
+            'user'=>$user,
+            'access_token'=>$token,
 
-
+        ], 201);
     }
 
+    /**
+     * @throws \DomainException
+     */
+    public function login(LoginUserRequest $request): JsonResponse
+{
+    $dto = LoginUserDTO::fromArray($request->validated());
+
+    try {
+        $result = $this->authServices->login($dto);
+    } catch (\DomainException $e) {
+        return response()->json(['message' => $e->getMessage()], 401);
+    }
+
+    return response()->json([
+        'message'      => 'User logged in successfully',
+        'access_token' => $result['token'],
+        'user'         => $result['user'],
+    ], 200);
+}
 
     public function logout(Request $request): JsonResponse
     {
