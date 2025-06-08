@@ -1,30 +1,30 @@
 <?php
-namespace App\Swagger\Professors;
 
+namespace App\Swagger\OtherWorkes;
 
 use OpenApi\Annotations as OA;
 
 
 /**
- *                    //create new professor
+ *                    //create new OtherWorker
  * @OA\Post(
- * path="/api/v1/professors",
- * tags={"Professors"},
- * summary="Create a new professor",
- * description = "Creates a new professor record in the system",
+ * path="/api/v1/otherWorkers",
+ * tags={"OtherWorkers"},
+ * summary="Create a new otherWorker",
+ * description = "Creates a new otherWorker record in the system",
  * security={{"sanctum": {}}},
  * @OA\RequestBody(
  *  required=true,
- *  description= "Professor data",
- *  @OA\JsonContent(ref="#/components/schemas/Professor")
+ *  description= "OtherWorker data",
+ *  @OA\JsonContent(ref="#/components/schemas/OtherWorker")
  * ),
  * @OA\Response(
  *         response=201,
- *         description="Professor created successfully",
+ *         description="OtherWorker created successfully",
  *         @OA\JsonContent(
  *             type="object",
- *             @OA\Property(property="message", type="string", example="Professor created successfully"),
- *             @OA\Property(property="data", ref="#/components/schemas/Professor")
+ *             @OA\Property(property="message", type="string", example="OtherWorker created successfully"),
+ *             @OA\Property(property="data", ref="#/components/schemas/OtherWorker")
  *         )
  *     ),
  *     @OA\Response(
@@ -36,12 +36,12 @@ use OpenApi\Annotations as OA;
  *     @OA\Response(response=500, ref="#/components/responses/ServerError")
  * )
  *
- *                         //get a professor
+ *                         //get a otherWorker
  * @OA\Get(
- *     path="/api/v1/professor",
- *     tags={"Professors"},
- *     summary="Get paginated list of professors",
- *     description="Retrieve a paginated list of all professors with optional filtering",
+ *     path="/api/v1/otherWorker",
+ *     tags={"OtherWorkers"},
+ *     summary="Get paginated list of otherWorkers",
+ *     description="Retrieve a paginated list of all otherWorkers with optional filtering",
  *     security={{"sanctum": {}}},
  *     @OA\Parameter(
  *         name="page",
@@ -87,14 +87,14 @@ use OpenApi\Annotations as OA;
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Professors retrieved successfully",
+ *         description="OtherWorkers retrieved successfully",
  *         @OA\JsonContent(
  *             type="object",
  *             @OA\Property(property="message", type="string", example="Students retrieved successfully"),
  *             @OA\Property(
  *                 property="data",
  *                 type="array",
- *                 @OA\Items(ref="#/components/schemas/Professor")
+ *                 @OA\Items(ref="#/components/schemas/OtherWorker")
  *             ),
  *             @OA\Property(property="links", ref="#/components/schemas/PaginationLinks"),
  *             @OA\Property(property="meta", ref="#/components/schemas/PaginationMeta")
@@ -103,68 +103,68 @@ use OpenApi\Annotations as OA;
  *     @OA\Response(response=401, ref="#/components/responses/Unauthorized"),
  *     @OA\Response(response=500, ref="#/components/responses/ServerError")
  * )
- *                           //Get professor by id
+ *                           //Get otherWorker by id
  * @OA\Get(
- *     path="/api/v1/professors/{professor}",
- *     tags={"Professors"},
- *     summary="Get professor by ID",
- *     description="Retrieve a specific professor by their ID",
+ *     path="/api/v1/otherWorkers/{otherWorker}",
+ *     tags={"OtherWorkers"},
+ *     summary="Get otherWorker by ID",
+ *     description="Retrieve a specific otherWorker by their ID",
  *     security={{"sanctum": {}}},
  *     @OA\Parameter(
  *         name="student",
  *         in="path",
  *         required=true,
- *         description="Professor ID",
+ *         description="OtherWorker ID",
  *         @OA\Schema(type="integer", minimum=1, example=1)
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Professor retrieved successfully",
+ *         description="OtherWorker retrieved successfully",
  *         @OA\JsonContent(
  *             type="object",
- *             @OA\Property(property="message", type="string", example="Professor retrieved successfully"),
- *             @OA\Property(property="data", ref="#/components/schemas/Professor")
+ *             @OA\Property(property="message", type="string", example="OtherWorker retrieved successfully"),
+ *             @OA\Property(property="data", ref="#/components/schemas/OtherWorker")
  *         )
  *     ),
  *     @OA\Response(
  *         response=404,
- *         description="Professor not found",
+ *         description="OtherWorker not found",
  *         @OA\JsonContent(ref="#/components/responses/NotFound")
  *     ),
  *     @OA\Response(response=401, ref="#/components/responses/Unauthorized"),
  *     @OA\Response(response=500, ref="#/components/responses/ServerError")
  * )
- *                           //update professor
+ *                           //update otherWorker
  * @OA\Put(
- *     path="/api/v1/professors/{professor}",
- *     tags={"Professors"},
- *     summary="Update an existing professor",
- *     description="Update professor information by ID",
+ *     path="/api/v1/otherWorkers/{otherWorker}",
+ *     tags={"OtherWorkers"},
+ *     summary="Update an existing otherWorker",
+ *     description="Update otherWorker information by ID",
  *     security={{"sanctum": {}}},
  *     @OA\Parameter(
- *         name="professor",
+ *         name="otherWorker",
  *         in="path",
  *         required=true,
- *         description="Professor ID to update",
+ *         description="OtherWorker ID to update",
  *         @OA\Schema(type="integer", minimum=1, example=1)
  *     ),
  *     @OA\RequestBody(
  *         required=true,
- *         description="Updated professor data",
- *         @OA\JsonContent(ref="#/components/schemas/ProfessorUpdate")
+ *         description="Updated otherWorker data",
+ *         @OA\JsonContent(ref="#/components/schemas/OtherWorkerUpdate")
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Professor updated successfully",
+ *         description="OtherWorker updated successfully",
  *         @OA\JsonContent(
  *             type="object",
- *             @OA\Property(property="message", type="string", example="Professor updated successfully"),
- *             @OA\Property(property="data", ref="#/components/schemas/ProfessorUpdate")
+ *             @OA\Property(property="message", type="string", example="OtherWorker updated successfully"),
+ *             @OA\Property(property="data", ref="#/components/schemas/OtherWorkerUpdate")
  *         )
  *     ),
  *     @OA\Response(
  *         response=404,
- *         description="Professor not found",
+ *         description="OtherWorker not found",
  *         @OA\JsonContent(ref="#/components/responses/NotFound")
  *     ),
  *     @OA\Response(
@@ -177,34 +177,34 @@ use OpenApi\Annotations as OA;
  * )
  *                            //delete student
  * @OA\Delete(
- *     path="/api/v1/professors/{professor}",
- *     tags={"Professors"},
- *     summary="Delete a professor",
- *     description="Soft delete a professor by ID",
+ *     path="/api/v1/otherWorkers/{otherWorker}",
+ *     tags={"OtherWorkers"},
+ *     summary="Delete a otherWorker",
+ *     description="Soft delete a otherWorker by ID",
  *     security={{"sanctum": {}}},
  *     @OA\Parameter(
- *         name="professor",
+ *         name="otherWorker",
  *         in="path",
  *         required=true,
- *         description="Professor ID to delete",
+ *         description="OtherWorker ID to delete",
  *         @OA\Schema(type="integer", minimum=1, example=1)
  *     ),
  *     @OA\Response(
  *         response=200,
- *         description="Professor deleted successfully",
+ *         description="OtherWorker deleted successfully",
  *         @OA\JsonContent(
  *             type="object",
- *             @OA\Property(property="message", type="string", example="Professor deleted successfully"),
+ *             @OA\Property(property="message", type="string", example="OtherWorker deleted successfully"),
  *             @OA\Property(property="data", type="object", nullable=true, example=null)
  *         )
  *     ),
  *     @OA\Response(
  *         response=404,
- *         description="Professor not found",
+ *         description="OtherWorker not found",
  *         @OA\JsonContent(ref="#/components/responses/NotFound")
  *     ),
  *     @OA\Response(response=401, ref="#/components/responses/Unauthorized"),
  *     @OA\Response(response=500, ref="#/components/responses/ServerError")
  * )
  */
-class ProfessorDocs{}
+class OtherWorkerDocs{}

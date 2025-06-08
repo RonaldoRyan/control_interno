@@ -15,7 +15,7 @@ class PdfController extends Controller
     public function exportStudentPdf($id, PdfService $pdfService)
     {
         $student = Student::findOrFail($id);
-        $pdfContent = $pdfService->generatePdf($student, 'pdf.student', 'student');
+        $pdfContent = $pdfService->generatePdf($student, 'pdf', 'student');
         $filename = 'ficha_estudiante_' . $student->name . '.pdf';
 
         return response($pdfContent, 200, [

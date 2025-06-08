@@ -70,7 +70,7 @@ class StudentController extends Controller
 
         return response()->json([
             'student' => new StudentResource($student),
-        ]);
+        ], 200);
     }
 
 
@@ -82,7 +82,7 @@ class StudentController extends Controller
         $this->studentService->deleteStudent($id);
         return response()->json([
             'message' => 'Student deleted successfully',
-        ]);
+        ], 200);
     }
 
 

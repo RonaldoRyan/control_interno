@@ -15,6 +15,7 @@
                     "Auth"
                 ],
                 "summary": "User login",
+                "description": "//Login",
                 "operationId": "8b0ed6b21d3f55b7633c456c061e6816",
                 "requestBody": {
                     "required": true,
@@ -51,7 +52,7 @@
                                     "properties": {
                                         "token": {
                                             "type": "string",
-                                            "example": "token generado"
+                                            "example": "token"
                                         },
                                         "user": {
                                             "type": "object"
@@ -63,10 +64,1113 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "422": {
-                        "description": "Validation error"
+                        "$ref": "#/components/schemas/ValidationError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        "/api/v1/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User logout",
+                "description": "Revoke the current access token of the authenticated user",
+                "operationId": "ff10f7b19dc7292ff9ed74b4faa493d4",
+                "responses": {
+                    "200": {
+                        "description": "Successful logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User logged out successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Register new user",
+                "description": "Create a new user with the predefined request.",
+                "operationId": "65fabd079dbda48c0fa7095512aa9fa2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterUserRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User registered correctly",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterUserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#/components/schemas/ValidationError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        "/api/v1/otherWorkers": {
+            "post": {
+                "tags": [
+                    "OtherWorkers"
+                ],
+                "summary": "Create a new otherWorker",
+                "description": "Creates a new otherWorker record in the system",
+                "operationId": "4bb82685718d2484260f31d0d2109ede",
+                "requestBody": {
+                    "description": "OtherWorker data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OtherWorker"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "OtherWorker created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OtherWorker created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/OtherWorker"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/otherWorker": {
+            "get": {
+                "tags": [
+                    "OtherWorkers"
+                ],
+                "summary": "Get paginated list of otherWorkers",
+                "description": "Retrieve a paginated list of all otherWorkers with optional filtering",
+                "operationId": "87cef31131255dae4a7df7fe9a2b38de",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 15,
+                            "maximum": 100,
+                            "minimum": 1,
+                            "example": 15
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term for student name or email",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "john"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by student status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "suspended"
+                            ],
+                            "example": "active"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Field to sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "created_at",
+                            "enum": [
+                                "name",
+                                "email",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "desc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OtherWorkers retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Students retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/OtherWorker"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationLinks"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationMeta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/otherWorkers/{otherWorker}": {
+            "get": {
+                "tags": [
+                    "OtherWorkers"
+                ],
+                "summary": "Get otherWorker by ID",
+                "description": "Retrieve a specific otherWorker by their ID",
+                "operationId": "00dc25073f30840a08eb5929a59bcd61",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "OtherWorker ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OtherWorker retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OtherWorker retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/OtherWorker"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OtherWorker not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "OtherWorkers"
+                ],
+                "summary": "Update an existing otherWorker",
+                "description": "Update otherWorker information by ID",
+                "operationId": "8ffecb2a193daeb82ccb13df5aeabb2e",
+                "parameters": [
+                    {
+                        "name": "otherWorker",
+                        "in": "path",
+                        "description": "OtherWorker ID to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated otherWorker data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OtherWorkerUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OtherWorker updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OtherWorker updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/OtherWorkerUpdate"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OtherWorker not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "OtherWorkers"
+                ],
+                "summary": "Delete a otherWorker",
+                "description": "Soft delete a otherWorker by ID",
+                "operationId": "8aa45b8bec3d4a081dcbe3edefccf3c8",
+                "parameters": [
+                    {
+                        "name": "otherWorker",
+                        "in": "path",
+                        "description": "OtherWorker ID to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OtherWorker deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "OtherWorker deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null,
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "OtherWorker not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/pdf/student/{id}": {
+            "get": {
+                "tags": [
+                    "PDF"
+                ],
+                "summary": "Export student PDF",
+                "description": "* @OA\\Get(\n    path=\"/api/v1/pdf/student/{id}\",\n    summary=\"Export student PDF\",\n    tags={\"PDF\"},\n    security={{\"sanctum\": {}}},",
+                "operationId": "534a0a13cd2d772200967ef510d2c964",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Student ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PDF generated successfully",
+                        "headers": {
+                            "Content-Type": {
+                                "description": "MIME type of the PDF",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/pdf"
+                                }
+                            },
+                            "Content-Disposition": {
+                                "description": "Indicates inline rendering in browser",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "inline; filename=ficha_estudiante_JohnDoe.pdf"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student not found"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/password/forgot": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Send password reset link to email",
+                "operationId": "43ef776d84cd5f1045b156210e3a997d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user@example.com"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Reset link sent successfully"
+                    },
+                    "422": {
+                        "$ref": "#/components/schemas/ValidationError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        "/api/v1/password/reset": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Reset password using token",
+                "operationId": "2f03f928f1fef2cd184401cc5ed75b0a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "1234567890abcdef"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "NewPassword123"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "NewPassword123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password reset successfully"
+                    },
+                    "422": {
+                        "$ref": "#/components/schemas/ValidationError"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        "/api/v1/password/change": {
+            "post": {
+                "tags": [
+                    "Passwords"
+                ],
+                "summary": "Change password for authenticated user",
+                "operationId": "5bfc161fc8a3b6419cd33587a618b46a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "current_password",
+                                    "password",
+                                    "password_confirmation"
+                                ],
+                                "properties": {
+                                    "current_password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "OldPassword123"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "NewPassword456"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "NewPassword456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password changed successfully"
+                    },
+                    "422": {
+                        "$ref": "#/components/schemas/ValidationError"
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/professors": {
+            "post": {
+                "tags": [
+                    "Professors"
+                ],
+                "summary": "Create a new professor",
+                "description": "Creates a new professor record in the system",
+                "operationId": "bccdac5fdd5164cbca7ad00ab548184a",
+                "requestBody": {
+                    "description": "Professor data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Professor"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Professor created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Professor created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Professor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/professor": {
+            "get": {
+                "tags": [
+                    "Professors"
+                ],
+                "summary": "Get paginated list of professors",
+                "description": "Retrieve a paginated list of all professors with optional filtering",
+                "operationId": "8bace2fdea8c24753cf9f28dcef77bf8",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 15,
+                            "maximum": 100,
+                            "minimum": 1,
+                            "example": 15
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term for student name or email",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "john"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by student status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "suspended"
+                            ],
+                            "example": "active"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Field to sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "created_at",
+                            "enum": [
+                                "name",
+                                "email",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "desc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Professors retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Students retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Professor"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationLinks"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationMeta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/professors/{professor}": {
+            "get": {
+                "tags": [
+                    "Professors"
+                ],
+                "summary": "Get professor by ID",
+                "description": "Retrieve a specific professor by their ID",
+                "operationId": "20cb15664d71c20a3431cab58d750f9a",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Professor ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Professor retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Professor retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Professor"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Professor not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Professors"
+                ],
+                "summary": "Update an existing professor",
+                "description": "Update professor information by ID",
+                "operationId": "8efdcefa45364277f2b44a423ad5587c",
+                "parameters": [
+                    {
+                        "name": "professor",
+                        "in": "path",
+                        "description": "Professor ID to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Updated professor data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ProfessorUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Professor updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Professor updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/ProfessorUpdate"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Professor not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Professors"
+                ],
+                "summary": "Delete a professor",
+                "description": "Soft delete a professor by ID",
+                "operationId": "65efb8184d081b3c36f3cb38f821b75b",
+                "parameters": [
+                    {
+                        "name": "professor",
+                        "in": "path",
+                        "description": "Professor ID to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Professor deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Professor deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null,
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Professor not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -81,14 +1185,125 @@
                 "tags": [
                     "Students"
                 ],
-                "summary": "Get all students",
+                "summary": "Get paginated list of students",
+                "description": "Retrieve a paginated list of all students with optional filtering",
                 "operationId": "9788d7452cee7294f345ef6978639194",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Page number for pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1,
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "description": "Number of items per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 15,
+                            "maximum": 100,
+                            "minimum": 1,
+                            "example": 15
+                        }
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search term for student name or email",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "john"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by student status",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "active",
+                                "inactive",
+                                "suspended"
+                            ],
+                            "example": "active"
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "description": "Field to sort by",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "created_at",
+                            "enum": [
+                                "name",
+                                "email",
+                                "created_at",
+                                "updated_at"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort_order",
+                        "in": "query",
+                        "description": "Sort direction",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "desc",
+                            "enum": [
+                                "asc",
+                                "desc"
+                            ]
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "List of students"
+                        "description": "Students retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Students retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Student"
+                                            }
+                                        },
+                                        "links": {
+                                            "$ref": "#/components/schemas/PaginationLinks"
+                                        },
+                                        "meta": {
+                                            "$ref": "#/components/schemas/PaginationMeta"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -101,115 +1316,55 @@
                 "tags": [
                     "Students"
                 ],
-                "summary": "Crear nuevo estudiante",
-                "description": "//create a new student\n/**",
+                "summary": "Create a new student",
+                "description": "Creates a new student record in the system",
                 "operationId": "e31caf57ba23f90ea252e9a1adc130b5",
                 "requestBody": {
+                    "description": "Student data",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "birth_date",
-                                    "age",
-                                    "address",
-                                    "dad_name",
-                                    "idNumber_dad",
-                                    "dad_phone",
-                                    "mom_name",
-                                    "idNumber_mom",
-                                    "mom_phone",
-                                    "emergency_contact",
-                                    "emergency_Idcontact",
-                                    "emergency_contact_phone",
-                                    "vaccine_information",
-                                    "allergies_or_conditions"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Ronaldo Ryan"
-                                    },
-                                    "birth_date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2000-01-01"
-                                    },
-                                    "age": {
-                                        "type": "integer",
-                                        "example": 24
-                                    },
-                                    "address": {
-                                        "type": "string",
-                                        "example": "123 Street"
-                                    },
-                                    "benefits": {
-                                        "type": "string",
-                                        "example": "Ninguno"
-                                    },
-                                    "dad_name": {
-                                        "type": "string",
-                                        "example": "Padre Ejemplo"
-                                    },
-                                    "idNumber_dad": {
-                                        "type": "string",
-                                        "example": "123456789"
-                                    },
-                                    "dad_phone": {
-                                        "type": "string",
-                                        "example": "123456789"
-                                    },
-                                    "mom_name": {
-                                        "type": "string",
-                                        "example": "Madre Ejemplo"
-                                    },
-                                    "idNumber_mom": {
-                                        "type": "string",
-                                        "example": "98765431"
-                                    },
-                                    "mom_phone": {
-                                        "type": "string",
-                                        "example": "987654321"
-                                    },
-                                    "emergency_contact": {
-                                        "type": "string",
-                                        "example": "Tía Ana"
-                                    },
-                                    "emergency_Idcontact": {
-                                        "type": "integer",
-                                        "example": 11223344
-                                    },
-                                    "emergency_contact_phone": {
-                                        "type": "string",
-                                        "example": "8888888888"
-                                    },
-                                    "vaccine_information": {
-                                        "type": "string",
-                                        "example": "Vacunas completas"
-                                    },
-                                    "allergies_or_conditions": {
-                                        "type": "string",
-                                        "example": "Ninguna"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/Student"
                             }
                         }
                     }
                 },
                 "responses": {
                     "201": {
-                        "description": "Estudiante creado"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
+                        "description": "Student created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Student created successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Student"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Validation error"
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/Unauthorized"
                     },
                     "500": {
-                        "description": "Internal Server Error"
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -219,33 +1374,62 @@
                 ]
             }
         },
-        "/api/v1/students/{id}": {
+        "/api/v1/students/{student}": {
             "get": {
                 "tags": [
                     "Students"
                 ],
-                "summary": "Get a student by ID",
-                "operationId": "d62442c356d25b81161a482fb66efbf4",
+                "summary": "Get student by ID",
+                "description": "Retrieve a specific student by their ID",
+                "operationId": "09f18988a31e15d65305d8fd65e56765",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "student",
                         "in": "path",
-                        "description": "ID of the student",
+                        "description": "Student ID",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Student data"
+                        "description": "Student retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Student retrieved successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/Student"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Student not found"
+                        "description": "Student not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -259,115 +1443,77 @@
                     "Students"
                 ],
                 "summary": "Update an existing student",
-                "operationId": "9ce726e62e22e3252b43e8ac848adb68",
+                "description": "Update student information by ID",
+                "operationId": "f8419d0a36661c2e0b683872b3c0d418",
+                "parameters": [
+                    {
+                        "name": "student",
+                        "in": "path",
+                        "description": "Student ID to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
                 "requestBody": {
+                    "description": "Updated student data",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "name",
-                                    "birth_date",
-                                    "age",
-                                    "address",
-                                    "dad_name",
-                                    "idNumber_dad",
-                                    "dad_phone",
-                                    "mom_name",
-                                    "idNumber_mom",
-                                    "mom_phone",
-                                    "emergency_contact",
-                                    "emergency_Idcontact",
-                                    "emergency_contact_phone",
-                                    "vaccine_information",
-                                    "allergies_or_conditions"
-                                ],
-                                "properties": {
-                                    "idStudent": {
-                                        "type": "integer",
-                                        "format": "int64",
-                                        "example": 1
-                                    },
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Luis Solis"
-                                    },
-                                    "birth_date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2000-01-01"
-                                    },
-                                    "age": {
-                                        "type": "integer",
-                                        "example": 23
-                                    },
-                                    "address": {
-                                        "type": "string",
-                                        "example": "123 Main St"
-                                    },
-                                    "benefits": {
-                                        "type": "string",
-                                        "example": "None"
-                                    },
-                                    "dad_name": {
-                                        "type": "string",
-                                        "example": "John Doe Sr."
-                                    },
-                                    "idNumber_dad": {
-                                        "type": "string",
-                                        "example": "123456789"
-                                    },
-                                    "dad_phone": {
-                                        "type": "string",
-                                        "example": "1234567890"
-                                    },
-                                    "mom_name": {
-                                        "type": "string",
-                                        "example": "Jane Doe"
-                                    },
-                                    "idNumber_mom": {
-                                        "type": "string",
-                                        "example": "987654321"
-                                    },
-                                    "mom_phone": {
-                                        "type": "string",
-                                        "example": "0987654321"
-                                    },
-                                    "emergency_contact": {
-                                        "type": "string",
-                                        "example": "Alice Smith"
-                                    },
-                                    "emergency_Idcontact": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "emergency_contact_phone": {
-                                        "type": "string",
-                                        "example": "1122334455"
-                                    },
-                                    "vaccine_information": {
-                                        "type": "string",
-                                        "example": "All vaccines up to date"
-                                    },
-                                    "allergies_or_conditions": {
-                                        "type": "string",
-                                        "example": "None"
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/StudentUpdate"
                             }
                         }
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Student updated successfully"
+                    "200": {
+                        "description": "Student updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Student updated successfully"
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/StudentUpdate"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Student not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Validation error"
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -380,28 +1526,59 @@
                 "tags": [
                     "Students"
                 ],
-                "summary": "Delete an existing student",
-                "operationId": "b2b04afb4b4dd19acb12af1b701af550",
+                "summary": "Delete a student",
+                "description": "Soft delete a student by ID",
+                "operationId": "c77fa5d6a6d6084840810c6d67354d08",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "student",
                         "in": "path",
-                        "description": "ID of the student to delete",
+                        "description": "Student ID to delete",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "integer",
+                            "minimum": 1,
+                            "example": 1
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Student deleted successfully"
+                        "description": "Student deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Student deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "example": null,
+                                            "nullable": true
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
-                        "description": "Student not found"
+                        "description": "Student not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/responses/NotFound"
+                                }
+                            }
+                        }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "$ref": "#/components/responses/Unauthorized"
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/ServerError"
                     }
                 },
                 "security": [
@@ -412,17 +1589,640 @@
             }
         }
     },
-    "tags": [
-        {
-            "name": "Auth",
-            "description": "Auth"
-        },
-        {
-            "name": "Students",
-            "description": "Students"
-        }
-    ],
     "components": {
+        "schemas": {
+            "ValidationError": {
+                "title": "Validation Error Response",
+                "description": "Response structure for validation errors",
+                "properties": {
+                    "message": {
+                        "description": "General error message",
+                        "type": "string",
+                        "example": "The given data was invalid."
+                    },
+                    "errors": {
+                        "description": "Field-specific validation errors",
+                        "properties": {
+                            "name": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "The name field is required."
+                                ]
+                            },
+                            "email": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "The email must be a valid email address.",
+                                    "The email has already been taken."
+                                ]
+                            },
+                            "age": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "example": [
+                                    "The age must be at least 18."
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "status_code": {
+                        "description": "HTTP status code",
+                        "type": "integer",
+                        "example": 422
+                    }
+                },
+                "type": "object"
+            },
+            "PaginationLinks": {
+                "title": "Pagination Links",
+                "description": "Pagination navigation links",
+                "properties": {
+                    "first": {
+                        "description": "URL to first page",
+                        "type": "string",
+                        "example": "http://localhost:8000/api/v1/students?page=1"
+                    },
+                    "last": {
+                        "description": "URL to last page",
+                        "type": "string",
+                        "example": "http://localhost:8000/api/v1/students?page=10"
+                    },
+                    "prev": {
+                        "description": "URL to previous page",
+                        "type": "string",
+                        "example": "http://localhost:8000/api/v1/students?page=1",
+                        "nullable": true
+                    },
+                    "next": {
+                        "description": "URL to next page",
+                        "type": "string",
+                        "example": "http://localhost:8000/api/v1/students?page=3",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "PaginationMeta": {
+                "title": "Pagination Metadata",
+                "description": "Pagination metadata information",
+                "properties": {
+                    "current_page": {
+                        "description": "Current page number",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "from": {
+                        "description": "First item number on current page",
+                        "type": "integer",
+                        "example": 16
+                    },
+                    "last_page": {
+                        "description": "Last page number",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "per_page": {
+                        "description": "Items per page",
+                        "type": "integer",
+                        "example": 15
+                    },
+                    "to": {
+                        "description": "Last item number on current page",
+                        "type": "integer",
+                        "example": 30
+                    },
+                    "total": {
+                        "description": "Total number of items",
+                        "type": "integer",
+                        "example": 150
+                    },
+                    "path": {
+                        "description": "Base URL path",
+                        "type": "string",
+                        "example": "http://localhost:8000/api/v1/students"
+                    }
+                },
+                "type": "object"
+            },
+            "OtherWorker": {
+                "required": [
+                    "name",
+                    "idNumber",
+                    "address",
+                    "phone",
+                    "email",
+                    "section",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Jonh Doe"
+                    },
+                    "idNumber": {
+                        "type": "integer",
+                        "example": "65656555"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "San Ramon"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "465564564"
+                    },
+                    "email": {
+                        "type": "email",
+                        "example": "jonhdoe@example.com"
+                    },
+                    "section": {
+                        "type": "string",
+                        "example": "cocina"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "none"
+                    }
+                },
+                "type": "object"
+            },
+            "OtherWorkerUpdate": {
+                "required": [
+                    "name",
+                    "idNumber",
+                    "address",
+                    "phone",
+                    "email",
+                    "section",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Juan Doe"
+                    },
+                    "idNumber": {
+                        "type": "integer",
+                        "example": "58\n * 64864684"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "San Ramon"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "465564564"
+                    },
+                    "section": {
+                        "type": "string",
+                        "example": "Limpieza"
+                    },
+                    "email": {
+                        "type": "email",
+                        "example": "jonhdoe@example.com"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "everything"
+                    }
+                },
+                "type": "object"
+            },
+            "Professor": {
+                "required": [
+                    "name",
+                    "idNumber",
+                    "address",
+                    "phone",
+                    "email",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Jonh Doe"
+                    },
+                    "idNumber": {
+                        "type": "integer",
+                        "example": "65656555"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "San Ramon"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "465564564"
+                    },
+                    "email": {
+                        "type": "email",
+                        "example": "jonhdoe@example.com"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "none"
+                    }
+                },
+                "type": "object"
+            },
+            "ProfessorUpdate": {
+                "required": [
+                    "name",
+                    "idNumber",
+                    "address",
+                    "phone",
+                    "email",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Juan Doe"
+                    },
+                    "idNumber": {
+                        "type": "integer",
+                        "example": "58\n * 64864684"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "San Ramon"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "465564564"
+                    },
+                    "email": {
+                        "type": "email",
+                        "example": "jonhdoe@example.com"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "everything"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterUserRequest": {
+                "required": [
+                    "name",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Juan Pérez"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "juan@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "Password123"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "format": "password",
+                        "example": "Password123"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterUserResponse": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "example": "User created successfully"
+                    },
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "example": 10
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Juan Pérez"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "juan@example.com"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "updated_at": {
+                                "type": "string",
+                                "format": "date-time"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "Student": {
+                "required": [
+                    "name",
+                    "birth_date",
+                    "age",
+                    "address",
+                    "dad_name",
+                    "idNumber_dad",
+                    "dad_phone",
+                    "mom_name",
+                    "idNumber_mom",
+                    "mom_phone",
+                    "emergency_contact",
+                    "emergency_Idcontact",
+                    "emergency_contact_phone",
+                    "vaccine_information",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Luis Solis"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": 23
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Main St"
+                    },
+                    "benefits": {
+                        "type": "string",
+                        "example": "None"
+                    },
+                    "dad_name": {
+                        "type": "string",
+                        "example": "John Doe Sr."
+                    },
+                    "idNumber_dad": {
+                        "type": "integer",
+                        "example": 123456789
+                    },
+                    "dad_phone": {
+                        "type": "integer",
+                        "example": 1234567890
+                    },
+                    "mom_name": {
+                        "type": "string",
+                        "example": "Jane Doe"
+                    },
+                    "idNumber_mom": {
+                        "type": "integer",
+                        "example": 987654321
+                    },
+                    "mom_phone": {
+                        "type": "integer",
+                        "example": 987654321
+                    },
+                    "emergency_contact": {
+                        "type": "string",
+                        "example": "Alice Smith"
+                    },
+                    "emergency_Idcontact": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "emergency_contact_phone": {
+                        "type": "integer",
+                        "example": 1122334455
+                    },
+                    "vaccine_information": {
+                        "type": "string",
+                        "example": "All vaccines up to date"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "None"
+                    }
+                },
+                "type": "object"
+            },
+            "StudentUpdate": {
+                "required": [
+                    "name",
+                    "birth_date",
+                    "age",
+                    "address",
+                    "dad_name",
+                    "idNumber_dad",
+                    "dad_phone",
+                    "mom_name",
+                    "idNumber_mom",
+                    "mom_phone",
+                    "emergency_contact",
+                    "emergency_Idcontact",
+                    "emergency_contact_phone",
+                    "vaccine_information",
+                    "allergies_or_conditions"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Carlos Castro"
+                    },
+                    "birth_date": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2000-01-01"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "123 Main St"
+                    },
+                    "benefits": {
+                        "type": "string",
+                        "example": "None"
+                    },
+                    "dad_name": {
+                        "type": "string",
+                        "example": "John Doe Sr."
+                    },
+                    "idNumber_dad": {
+                        "type": "integer",
+                        "example": 123456789
+                    },
+                    "dad_phone": {
+                        "type": "integer",
+                        "example": 1234567890
+                    },
+                    "mom_name": {
+                        "type": "string",
+                        "example": "Jane Doe"
+                    },
+                    "idNumber_mom": {
+                        "type": "integer",
+                        "example": 987654321
+                    },
+                    "mom_phone": {
+                        "type": "integer",
+                        "example": 987654321
+                    },
+                    "emergency_contact": {
+                        "type": "string",
+                        "example": "Alice Smith"
+                    },
+                    "emergency_Idcontact": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "emergency_contact_phone": {
+                        "type": "integer",
+                        "example": 1122334455
+                    },
+                    "vaccine_information": {
+                        "type": "string",
+                        "example": "All vaccines up to date"
+                    },
+                    "allergies_or_conditions": {
+                        "type": "string",
+                        "example": "Milk"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "responses": {
+            "Unauthorized": {
+                "description": "Authentication required",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Unauthenticated."
+                                },
+                                "status_code": {
+                                    "type": "integer",
+                                    "example": 401
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "Access denied",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "This action is unauthorized."
+                                },
+                                "status_code": {
+                                    "type": "integer",
+                                    "example": 403
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "NotFound": {
+                "description": "Resource not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Resource not found."
+                                },
+                                "status_code": {
+                                    "type": "integer",
+                                    "example": 404
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "ServerError": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Internal server error. Please try again later."
+                                },
+                                "status_code": {
+                                    "type": "integer",
+                                    "example": 500
+                                },
+                                "error_code": {
+                                    "description": "Internal error code for debugging",
+                                    "type": "string",
+                                    "example": "ERR_DB_CONNECTION",
+                                    "nullable": true
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            },
+            "TooManyRequests": {
+                "description": "Rate limit exceeded",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "example": "Too many requests. Please try again later."
+                                },
+                                "status_code": {
+                                    "type": "integer",
+                                    "example": 429
+                                },
+                                "retry_after": {
+                                    "description": "Seconds to wait before retrying",
+                                    "type": "integer",
+                                    "example": 60
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "securitySchemes": {
             "sanctum": {
                 "type": "apiKey",
@@ -431,5 +2231,31 @@
                 "in": "header"
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Students",
+            "description": "Endpoints for managing student records"
+        },
+        {
+            "name": "Professors",
+            "description": "Endpoints for managing professor records"
+        },
+        {
+            "name": "OtherWorkers",
+            "description": "Endpoints for managing other worker records"
+        },
+        {
+            "name": "Auth",
+            "description": "Endpoints for authentication: login, register and logout"
+        },
+        {
+            "name": "PDF",
+            "description": "Endpoints for generating PDF reports"
+        },
+        {
+            "name": "Passwords",
+            "description": "Endpoints for Passwords methods"
+        }
+    ]
 }
