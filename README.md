@@ -1,232 +1,157 @@
-Dompdf
-======
+# Proyecto Control Interno
 
-[![Build Status](https://github.com/dompdf/dompdf/actions/workflows/test.yml/badge.svg)](https://github.com/dompdf/dompdf/actions/workflows/test.yml)
-[![Latest Release](https://poser.pugx.org/dompdf/dompdf/v/stable.png)](https://packagist.org/packages/dompdf/dompdf)
-[![Total Downloads](https://poser.pugx.org/dompdf/dompdf/downloads.png)](https://packagist.org/packages/dompdf/dompdf)
-[![License](https://poser.pugx.org/dompdf/dompdf/license.png)](https://packagist.org/packages/dompdf/dompdf)
- 
-**Dompdf is an HTML to PDF converter**
+**Fullstack Application** con backend en Laravel y frontend en React.
 
-At its heart, dompdf is (mostly) a [CSS 2.1](http://www.w3.org/TR/CSS2/) compliant
-HTML layout and rendering engine written in PHP. It is a style-driven renderer:
-it will download and read external stylesheets, inline style tags, and the style
-attributes of individual HTML elements. It also supports most presentational
-HTML attributes.
+## 🔧 Tecnologías
 
-*This document applies to the latest stable code which may not reflect the current 
-release. For released code please
-[navigate to the appropriate tag](https://github.com/dompdf/dompdf/tags).*
+* **Backend**: Laravel 12, Sanctum, DDD (Services, DTOs, Repositories), Policies, Swagger (l5‑swagger)
+* **Frontend**: React (Vite + TypeScript), Axios, React Router v6, Tailwind CSS
+* **Testing**: PHPUnit (Feature tests), Cypress (E2E futura)
 
-----
+## 🚀 Requisitos
 
-**Check out the [demo](http://eclecticgeek.com/dompdf/debug.php) and ask any
-question on [StackOverflow](https://stackoverflow.com/questions/tagged/dompdf) or
-in [Discussions](https://github.com/dompdf/dompdf/discussions).**
+* PHP 8.2+, Composer, MySQL/PostgreSQL
+* Node.js 18+, npm
+* Extensiones PHP: OpenSSL, PDO, Mbstring, Tokenizer, XML, Ctype, JSON
 
-Follow us on [![Twitter](http://twitter-badges.s3.amazonaws.com/twitter-a.png)](http://www.twitter.com/dompdf).
+## 📦 Instalación Backend
 
----
+1. Clonar repo:
 
+   ```bash
+   git clone <tu-repo-url>.git
+   cd control_interno
+   ```
+2. Instalar dependencias:
 
+   ```bash
+   composer install
+   cp .env.example .env
+   php artisan key:generate
+   ```
+3. Configurar base de datos en `.env`:
 
-## Features
+   ```ini
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=control_interno
+   DB_USERNAME=root
+   DB_PASSWORD=
 
- * Handles most CSS 2.1 and a few CSS3 properties, including @import, @media &
-   @page rules
- * Supports most presentational HTML 4.0 attributes
- * Supports external stylesheets, either local or through http/ftp (via
-   fopen-wrappers)
- * Supports complex tables, including row & column spans, separate & collapsed
-   border models, individual cell styling
- * Image support (gif, png (8, 24 and 32 bit with alpha channel), bmp & jpeg)
- * No dependencies on external PDF libraries, thanks to the R&OS PDF class
- * Inline PHP support
- * Basic SVG support (see "Limitations" below)
- 
-## Requirements
+   SANCTUM_STATEFUL_DOMAINS=localhost:3000
+   SESSION_DOMAIN=localhost
+   ```
+4. Migrar y seed:
 
- * PHP version 7.1 or higher
- * DOM extension
- * MBString extension
- * php-font-lib
- * php-svg-lib
- 
-Note that some required dependencies may have further dependencies 
-(notably php-svg-lib requires sabberworm/php-css-parser).
+   ```bash
+   php artisan migrate --seed
+   ```
 
-### Recommendations
+## 📑 Documentación Swagger
 
- * OPcache (OPcache, XCache, APC, etc.): improves performance
- * GD (for image processing)
- * IMagick or GMagick extension: improves image processing performance
+1. Publicar config y assets:
 
-Visit the wiki for more information:
-https://github.com/dompdf/dompdf/wiki/Requirements
+   ```bash
+   php artisan vendor:publish --provider="L5Swagger\L5SwaggerServiceProvider"
+   ```
+2. Generar spec:
 
-## About Fonts & Character Encoding
+   ```bash
+   php artisan l5-swagger:generate
+   ```
+3. Ver en navegador:
 
-PDF documents internally support the following fonts: Helvetica, Times-Roman,
-Courier, Zapf-Dingbats, & Symbol. These fonts only support Windows ANSI
-encoding. In order for a PDF to display characters that are not available in
-Windows ANSI, you must supply an external font. Dompdf will embed any referenced
-font in the PDF so long as it has been pre-loaded or is accessible to dompdf and
-reference in CSS @font-face rules. See the
-[font overview](https://github.com/dompdf/dompdf/wiki/About-Fonts-and-Character-Encoding)
-for more information on how to use fonts.
+   ```
+   http://localhost:8000/api/documentation
+   ```
 
-The [DejaVu TrueType fonts](https://dejavu-fonts.github.io/) have been pre-installed
-to give dompdf decent Unicode character coverage by default. To use the DejaVu
-fonts reference the font in your stylesheet, e.g. `body { font-family: DejaVu
-Sans; }` (for DejaVu Sans). The following DejaVu 2.34 fonts are available:
-DejaVu Sans, DejaVu Serif, and DejaVu Sans Mono.
+## 🧪 Tests Backend
 
-## Easy Installation
+* **Feature tests**: flujo completo de API (autenticación, CRUD, PDF, password recovery)
 
-### Install with composer
+  ```bash
+  php artisan test
+  ```
 
-To install with [Composer](https://getcomposer.org/), simply require the
-latest version of this package.
+## ⚛️ Instalación Frontend
 
-```bash
-composer require dompdf/dompdf
+1. Ir a carpeta frontend:
+
+   ```bash
+   cd frontend
+   ```
+2. Instalar:
+
+   ```bash
+   npm install
+   ```
+3. Configurar `.env.development`:
+
+   ```env
+   VITE_API_URL=http://localhost:8000/api/v1
+   ```
+4. Ejecutar:
+
+   ```bash
+   npm run dev
+   ```
+
+## 🔐 Autenticación
+
+1. En React, solicitar CSRF:
+
+   ```ts
+   await api.get('/sanctum/csrf-cookie');
+   ```
+2. Login:
+
+   ```ts
+   await api.post('/login', { email, password });
+   ```
+3. Logout:
+
+   ```ts
+   await api.post('/logout');
+   ```
+
+## 🗂 Arquitectura
+
+* **Controllers** → Exponen endpoints REST
+* **Requests** → Validación (FormRequest)
+* **DTOs** → Data Transfer Objects
+* **Services** → Lógica de negocio
+* **Repositories** → Abstracción de persistencia
+* **Policies** → Autorización basada en roles
+* **Resources** → Transformación de JSON
+
+## 📄 Estructura de Carpetas
+
+```
+control_interno/
+├─ app/
+│  ├─ Http/Controllers/
+│  ├─ Services/
+│  ├─ DTOs/
+│  ├─ Policies/
+│  └─ Swagger/
+├─ routes/api.php
+├─ tests/Feature
+└─ tests/Unit
+frontend/
+├─ src/api/
+├─ src/components/
+├─ src/pages/
+├─ src/services/
+└─ src/hooks/
 ```
 
-Make sure that the autoload file from Composer is loaded.
+## 📖 Referencias
 
-```php
-// somewhere early in your project's loading, require the Composer autoloader
-// see: http://getcomposer.org/doc/00-intro.md
-require 'vendor/autoload.php';
+* [Laravel Docs](https://laravel.com/docs)
+* [React Docs](https://reactjs.org/docs)
+* [Tailwind CSS](https://tailwindcss.com/docs)
+* [Laravel Sanctum](https://laravel.com/docs/sanctum)
+* [l5-swagger](https://github.com/DarkaOnLine/L5-Swagger)
 
-```
 
-### Download and install
-
-Download a packaged archive of dompdf and extract it into the 
-directory where dompdf will reside
-
- * You can download stable copies of dompdf from
-   https://github.com/dompdf/dompdf/releases
- * Or download a nightly (the latest, unreleased code) from
-   http://eclecticgeek.com/dompdf
-
-Use the packaged release autoloader to load dompdf, libraries,
-and helper functions in your PHP:
-
-```php
-// include autoloader
-require_once 'dompdf/autoload.inc.php';
-```
-
-Note: packaged releases are named according using semantic
-versioning (_dompdf_MAJOR-MINOR-PATCH.zip_). So the 1.0.0 
-release would be dompdf_1-0-0.zip. This is the only download
-that includes the autoloader for Dompdf and all its dependencies.
-
-### Install with git
-
-From the command line, switch to the directory where dompdf will
-reside and run the following commands:
-
-```sh
-git clone https://github.com/dompdf/dompdf.git
-cd dompdf/lib
-
-git clone https://github.com/PhenX/php-font-lib.git php-font-lib
-cd php-font-lib
-git checkout 0.5.1
-cd ..
-
-git clone https://github.com/PhenX/php-svg-lib.git php-svg-lib
-cd php-svg-lib
-git checkout v0.3.2
-cd ..
-
-git clone https://github.com/sabberworm/PHP-CSS-Parser.git php-css-parser
-cd php-css-parser
-git checkout 8.1.0
-```
-
-Require dompdf and it's dependencies in your PHP.
-For details see the [autoloader in the utils project](https://github.com/dompdf/utils/blob/master/autoload.inc.php).
-
-## Quick Start
-
-Just pass your HTML in to dompdf and stream the output:
-
-```php
-// reference the Dompdf namespace
-use Dompdf\Dompdf;
-
-// instantiate and use the dompdf class
-$dompdf = new Dompdf();
-$dompdf->loadHtml('hello world');
-
-// (Optional) Setup the paper size and orientation
-$dompdf->setPaper('A4', 'landscape');
-
-// Render the HTML as PDF
-$dompdf->render();
-
-// Output the generated PDF to Browser
-$dompdf->stream();
-```
-
-### Setting Options
-
-Set options during dompdf instantiation:
-
-```php
-use Dompdf\Dompdf;
-use Dompdf\Options;
-
-$options = new Options();
-$options->set('defaultFont', 'Courier');
-$dompdf = new Dompdf($options);
-```
-
-or at run time
-
-```php
-use Dompdf\Dompdf;
-
-$dompdf = new Dompdf();
-$options = $dompdf->getOptions();
-$options->setDefaultFont('Courier');
-$dompdf->setOptions($options);
-```
-
-See [Dompdf\Options](src/Options.php) for a list of available options.
-
-### Resource Reference Requirements
-
-In order to protect potentially sensitive information Dompdf imposes 
-restrictions on files referenced from the local file system or the web. 
-
-Files accessed through web-based protocols have the following requirements:
- * The Dompdf option "isRemoteEnabled" must be set to "true"
- * PHP must either have the curl extension enabled or the 
-   allow_url_fopen setting set to true
-   
-Files accessed through the local file system have the following requirement:
- * The file must fall within the path(s) specified for the Dompdf "chroot" option
-
-## Limitations (Known Issues)
-
- * Table cells are not pageable, meaning a table row must fit on a single page.
- * Elements are rendered on the active page when they are parsed.
- * Embedding "raw" SVG's (`<svg><path...></svg>`) isn't working yet, you need to
-   either link to an external SVG file, or use a DataURI like this:
-     ```php
-     $html = '<img src="data:image/svg+xml;base64,' . base64_encode($svg) . '" ...>';
-     ```
-     Watch https://github.com/dompdf/dompdf/issues/320 for progress
- * Does not support CSS flexbox.
- * Does not support CSS Grid.
----
-
-[![Donate button](https://www.paypal.com/en_US/i/btn/btn_donate_SM.gif)](http://goo.gl/DSvWf)
-
-*If you find this project useful, please consider making a donation.
-Any funds donated will be used to help further development on this project.)*
